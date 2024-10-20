@@ -1,0 +1,79 @@
+@import 'datatables.net-dt';
+@import 'datatables.net-responsive-dt';
+@import 'datatables.net-select-dt';
+
+tr.selected {
+  background-color:white /* Cambia a cualquier color que desees */
+}
+
+
+.containerFormTable {
+    width: 100%; 
+    /* height: calc(100vh - 100px);  */
+    margin-top: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+
+  .containerPrincipal{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+
+  .containerPart{
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .containerPart12{
+    background-color: white;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 0 10px;
+  }
+
+  .containerButton{
+    display: flex;
+    padding: 5px;
+    
+  }
+
+  .btnControlFrom{
+    background-color: #083D77;
+    margin-left: 5px;
+    color:white;
+  }
+
+  .btnGuardar{
+    color:white;
+    background-color: #083D77;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+  }
+  .btnGuardar:hover{
+    color:black;
+    background-color: #083D77;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+  }

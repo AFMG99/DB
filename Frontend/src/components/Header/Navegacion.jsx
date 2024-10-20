@@ -7,7 +7,7 @@ const Navegacion = () => {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navegacion">
-        <div className="container-fluid d-flex justify-content-between align-items-center">
+        <div className="container-fluid d-flex justify-content-end align-items-center">
           <Link className="navbar-brand" to="/home"> 
             <img className='imgN' src={icono} alt="Home" /> 
           </Link>
@@ -16,13 +16,12 @@ const Navegacion = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-            <ul className="navbar-nav mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link className="nav-link" aria-current="page" to="/home">Principal</Link>
-              </li>
+          <div className="collapse navbar-collapse " id="navbarNavDropdown">
+            <ul className="navbar-nav">
+                <li className="nav-item"><Link to={"/usuarios"} className="nav-link" href="#">Usuarios</Link></li>
             </ul>
           </div>
+
         </div>
       </nav>
     </div>

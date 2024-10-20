@@ -43,7 +43,7 @@ const Header = () => {
 
     return (
         <header className="header d-flex align-items-center justify-content-between px-4 py-3 shadow-sm">
-            <h1 className="header-title">TdeAAds!</h1>
+            <h1 className="header-title"></h1>
             <div className="perfil d-flex align-items-center">
                 <button
                     className="btn"

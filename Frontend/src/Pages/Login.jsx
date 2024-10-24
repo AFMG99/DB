@@ -94,12 +94,12 @@ function Login() {
                                 <Link to="/cambiar-contrasena" className="text-success">¿Olvidaste tu Contraseña?</Link>
                             </div>
                         </form>
-
+{/* 
                         <div className="text-center mt-4">
                             <p>¿No tienes cuenta? Ir a <Link to="/registro" className="text-success">Registro</Link></p>
-                        </div>
+                        </div> */}
 
-                        <div className="d-flex justify-content-center mt-3">
+                        {/* <div className="d-flex justify-content-center mt-3">
                             <button className="btn btn-outline-success me-2">
                                 <img src={imagen2} alt="facebook" />
                             </button>
@@ -109,7 +109,7 @@ function Login() {
                             <button className="btn btn-outline-success">
                                 <img src={imagen4} alt="google" />
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>

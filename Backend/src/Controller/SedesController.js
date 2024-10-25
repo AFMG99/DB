@@ -1,4 +1,4 @@
-import { getAllSedes, seleccionarSede, insertarSede } from "../Model/SedesModel.js";
+import { getAllSedes, seleccionarSede, insertarSede, actualizarSede } from "../Model/SedesModel.js";
 
 const sedes = async (req, res) => {
     try {
@@ -24,7 +24,16 @@ const consultarSede = async (req, res) => {
 const crearSede = async (req, res) => {
     console.log('Datos recibidos para inserción de sede:', req.body);
 
-    const { Id_sede, Nombre, Servicio, Capacidad, Num_empleado, Horario_inicio, Horario_final, NIT } = req.body;
+    const { 
+        Id_sede, 
+        Nombre, 
+        Servicio, 
+        Capacidad, 
+        Num_empleado, 
+        Horario_inicio, 
+        Horario_final, 
+        NIT 
+    } = req.body;
 
     console.log('NIT recibido:', NIT);
     try {
@@ -36,4 +45,34 @@ const crearSede = async (req, res) => {
     }
 };
 
-export { sedes, consultarSede, crearSede };
+const modificarSede = async (req, res) => {
+    const {
+        Id_sede,
+        Nombre,
+        Servicio,
+        Capacidad,
+        Num_empleado,
+        Horario_inicio,
+        Horario_final,
+        NIT
+    } = req.body;
+
+    try {
+        const resultado = await actualizarSede({
+            Id_sede,
+            Nombre,
+            Servicio,
+            Capacidad,
+            Num_empleado,
+            Horario_inicio,
+            Horario_final,
+            NIT
+        });
+        res.json(resultado);
+    } catch (error) {
+        console.error('Error al actulizar los datos:', error);
+        return res.status(500).json({ message: 'Error interno del servidor.', error: error.message })
+    }
+};
+
+export { sedes, consultarSede, crearSede, modificarSede };

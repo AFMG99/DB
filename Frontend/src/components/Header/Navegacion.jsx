@@ -4,6 +4,9 @@ import icono from '../../assets/img/icono.png';
 import '../../assets/css/estilos.css';
 import { getPerfilData } from '../../Service/Services';
 import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
 
 const Navegacion = () => {
     const [perfil, setPerfil] = useState({
@@ -59,11 +62,21 @@ const Navegacion = () => {
                             <li className="nav-item">
                                 <Link to={"/usuarios"} className="nav-link">Usuarios</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to={"/empleados"} className="nav-link">Empleados</Link>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Registrar
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <Link to="/empleados" className="dropdown-item">Empleados</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/sedes" className="dropdown-item">Sedes</Link>
+                                    </li>
+                                </ul>
                             </li>
-                            <li className="nav-item">
-                                <Link to={"/sedes"} className="nav-link">Sedes</Link>
+                            <li>
+                                <Link to="/vuelos" className="nav-link">Vuelos</Link>
                             </li>
                         </ul>
                     </div>

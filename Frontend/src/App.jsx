@@ -9,6 +9,7 @@ import CambiarContrasena from './Pages/CambiarContrasena';
 import Usuarios from './Pages/Usuario/Usuarios';
 import Empleados from './Pages/Empleados';
 import Sedes from './Pages/Sedes';
+import Vuelos from './Pages/Vuelos';
 
 const NotFound = () => {
     return <h1>404 - Página no encontrada</h1>;
@@ -35,6 +36,7 @@ const MainContent = () => {
                 <Route path='/usuarios' element={<Usuarios />} />
                 <Route path='/empleados' element={<Empleados />} />
                 <Route path='/sedes' element={<Sedes />} />
+                <Route path='/vuelos' element={<Vuelos />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

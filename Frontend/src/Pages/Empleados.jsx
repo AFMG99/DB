@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { crearEmpleado, getAllEmpleados, consultarEmpleado } from '../Service/Services';
+import { crearEmpleado, getAllEmpleados, consultarEmpleado, modificarEmpleado } from '../Service/Services';
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
@@ -55,9 +55,9 @@ const Empleados = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const nuevoEmpleado = {
-        Id_empleado: inputDocumentoId,
+      const empleado = {
         Tipo_doc: inputTipo,
+        Id_empleado: inputDocumentoId,
         Primer_nom: inputPrimerNom,
         Segundo_nom: inputSegundoNom,
         Primer_apellido: inputPrimerApe,
@@ -65,22 +65,24 @@ const Empleados = () => {
         Fecha_nacimiento: inputFecha,
       };
 
-      console.log('datos', nuevoEmpleado);
-      await crearEmpleado(nuevoEmpleado);
-      console.log('Empleado creado', nuevoEmpleado)
+      if (accion === 'Nuevo') {
+        await crearEmpleado(empleado);
+        alert("Empleado agregado exitosamente");
+      } else if (accion === 'Editar') {
+        await modificarEmpleado(empleado);
+        alert("Empleado actualizado exitosamente");
+      } 
+
       const data = await getAllEmpleados();
-      const formattedData = data.map(empleado => ({
-        ...empleado,
-        Fecha_nacimiento: empleado.Fecha_nacimiento.split('T')[0],
-      }));
-
-      setEmpleados(formattedData);
-
-      handleClickCancel();
-      alert("Empleado agregado exitosamente");
-
+        const formattedData = data.map(empleado => ({
+          ...empleado,
+          Fecha_nacimiento: empleado.Fecha_nacimiento.split('T')[0],
+        }));
+      
+        setEmpleados(formattedData);
+        handleClickCancel();
     } catch (error) {
-      console.error("Error al agregar empleado:", error);
+      console.error("Error al procesar empleado:", error);
     }
   };
 
@@ -88,8 +90,8 @@ const Empleados = () => {
     setBtnNewDisabled(true);
     setBtnCancelDisabled(false);
     setBtnSend(false);
-    setInputDocumentoId('');
     setInputTipo('');
+    setInputDocumentoId('');
     setInputPrimerNom('');
     setInputSegundoNom('');
     setInputPrimerApe('');
@@ -103,8 +105,8 @@ const Empleados = () => {
     setBtnCancelDisabled(true);
     setBtnEditDisabled(true);
     setBtnSend(true);
-    setInputDocumentoId('');
     setInputTipo('');
+    setInputDocumentoId('');
     setInputPrimerNom('');
     setInputSegundoNom('');
     setInputPrimerApe('');
@@ -126,8 +128,8 @@ const Empleados = () => {
   };
 
   const columns = [
-    { title: "ID", data: "Id_empleado" },
     { title: "Tipo Doc", data: "Tipo_doc" },
+    { title: "Cedula", data: "Id_empleado" },
     { title: "Primer Nombre", data: "Primer_nom" },
     { title: "Segundo Nombre", data: "Segundo_nom" },
     { title: "Primer Apellido", data: "Primer_apellido" },
@@ -138,8 +140,8 @@ const Empleados = () => {
   const handleRowSelect = (event, dt, type, indexes) => {
     const data = dt.data();
     setBtnEditDisabled(false);
-    setInputDocumentoId(data.Id_empleado)
     setInputTipo(data.Tipo_doc)
+    setInputDocumentoId(data.Id_empleado)
     setInputPrimerNom(data.Primer_nom)
     setInputSegundoNom(data.Segundo_nom)
     setInputPrimerApe(data.Primer_apellido)
@@ -178,22 +180,8 @@ const Empleados = () => {
 
             <div className="container mt-5">
               <form onSubmit={handleSubmit}>
-                <div className="col-1">
-                  <label className="form-label">Cedula</label>
-                </div>
                 <div className="col-12">
-                  <input
-                    ref={documentoidRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Cedula"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputDocumentoId}
-                    onChange={(e) => setInputDocumentoId(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-1">
-                  <label className="form-label">TipoDoc</label>
+                  <label className="form-label">Tipo Doc</label>
                 </div>
                 <div className="col-12">
                   <select
@@ -209,9 +197,22 @@ const Empleados = () => {
                   </select>
                 </div>
 
+                <div className="col-12">
+                  <label className="form-label">Cedula</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={documentoidRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese Cedula"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputDocumentoId}
+                    onChange={(e) => setInputDocumentoId(e.target.value)}
+                  />
+                </div>
 
-                <div className="col-1">
-                  <label className="form-label">PrimerNombre</label>
+                <div className="col-12">
+                  <label className="form-label">Primer Nombre</label>
                 </div>
                 <div className="col-12">
                   <input
@@ -224,8 +225,8 @@ const Empleados = () => {
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">SegundoNombre</label>
+                <div className="col-12">
+                  <label className="form-label">Segundo Nombre</label>
                 </div>
                 <div className="col-12">
                   <input
@@ -238,8 +239,8 @@ const Empleados = () => {
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">PrimerApellido</label>
+                <div className="col-12">
+                  <label className="form-label">Primer Apellido</label>
                 </div>
                 <div className="col-12">
                   <input
@@ -252,8 +253,8 @@ const Empleados = () => {
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">SegundoApellido</label>
+                <div className="col-12">
+                  <label className="form-label">Segundo Apellido</label>
                 </div>
                 <div className="col-12">
                   <input
@@ -266,8 +267,8 @@ const Empleados = () => {
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">FechaNac.</label>
+                <div className="col-12">
+                  <label className="form-label">Fecha de Nacimiento.</label>
                 </div>
                 <div className="col-12">
                   <input
@@ -287,7 +288,7 @@ const Empleados = () => {
                   className="btn w-100 btnGuardar"
                   disabled={btnSend}
                 >
-                  {(accion == "Editar") ? "Editar" : "Agregar"}
+                  {(accion == "Editar") ? "Actualizar" : "Agregar"}
                 </button>
               </form>
             </div>
@@ -314,8 +315,8 @@ const Empleados = () => {
               >
                 <thead>
                   <tr>
-                    <th>Cedula</th>
                     <th>Tipo Doc.</th>
+                    <th>Cedula</th>
                     <th>Primer Nombre</th>
                     <th>Segundo Nombre</th>
                     <th>Primer Apellido</th>

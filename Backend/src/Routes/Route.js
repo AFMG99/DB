@@ -1,12 +1,14 @@
 import express from 'express';
 import { Users, login, chagePassword } from '../Controller/LoginController.js';
 import { profile } from '../Controller/PerfilController.js';
-import { consultarEmpleado, crearEmpleado, empleados } from '../Controller/EmpleadoController.js';
-import { consultarSede, crearSede, sedes } from '../Controller/SedesController.js';
+import { consultarEmpleado, crearEmpleado, empleados, modificarEmpleado } from '../Controller/EmpleadoController.js';
+import { consultarSede, crearSede, modificarSede, sedes } from '../Controller/SedesController.js';
+import { vuelos } from '../Controller/VuelosController.js';
 
 const router = express.Router();
 
 router.post('/crear-empleado', crearEmpleado);
+router.put('/actualizar-empleado', modificarEmpleado);
 router.get('/empleados', empleados);
 router.get('/empleado', consultarEmpleado);
 
@@ -18,5 +20,8 @@ router.post('/cambiar-contrasena', chagePassword);
 router.get('/sedes', sedes);
 router.get('/sede', consultarSede);
 router.post('/crear-sede', crearSede);
+router.put('/actualizar-sede', modificarSede);
+
+router.get('/vuelos', vuelos);
 
 export default router;

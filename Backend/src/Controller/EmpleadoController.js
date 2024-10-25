@@ -1,4 +1,4 @@
-import { insertarEmpleado, getAllEmpleados, seleccionarEmpleado } from '../Model/EmpleadoModel.js';
+import { insertarEmpleado, getAllEmpleados, seleccionarEmpleado, actualizarEmpleado } from '../Model/EmpleadoModel.js';
 
 const empleados = async (req, res) => {
     try {
@@ -31,7 +31,15 @@ const crearEmpleado = async (req, res) => {
     }
 
     try {
-        const resultado = await insertarEmpleado({ Id_empleado, Tipo_doc, Primer_nom, Segundo_nom, Primer_apellido, Segundo_apellido, Fecha_nacimiento });
+        const resultado = await insertarEmpleado({ 
+            Id_empleado, 
+            Tipo_doc, 
+            Primer_nom, 
+            Segundo_nom, 
+            Primer_apellido, 
+            Segundo_apellido, 
+            Fecha_nacimiento 
+        });
         res.json(resultado);
     } catch (error) {
         console.error('Error al insertar empleado:', error);
@@ -39,4 +47,39 @@ const crearEmpleado = async (req, res) => {
     }
 };
 
-export { crearEmpleado, empleados, consultarEmpleado };
+const modificarEmpleado = async (req, res) => {
+    const {
+        Id_empleado,
+        Tipo_doc, 
+        Primer_nom, 
+        Segundo_nom, 
+        Primer_apellido, 
+        Segundo_apellido, 
+        Fecha_nacimiento
+    } = req.body;
+
+    console.log('Datos recibidos para actualización de empleado:', req.body);
+
+    if (!Id_empleado || !Tipo_doc || !Primer_nom || !Primer_apellido || !Fecha_nacimiento) {
+        return res.status(400).json({ message: 'Por favor complete todos los campos obligatorios.' });
+    }
+
+    try {
+        const resultado = await actualizarEmpleado({
+            Id_empleado,
+            Tipo_doc, 
+            Primer_nom, 
+            Segundo_nom, 
+            Primer_apellido, 
+            Segundo_apellido, 
+            Fecha_nacimiento
+        });
+        res.json(resultado);
+    } catch (error) {
+        console.error('Error al actulizar los datos:', error);
+        return res.status(500).json({ message: 'Error interno del servidor.', error: error.message })
+    }
+
+}
+
+export { crearEmpleado, empleados, consultarEmpleado, modificarEmpleado };

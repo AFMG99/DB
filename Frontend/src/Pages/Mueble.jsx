@@ -1,6 +1,6 @@
-import '../../assets/css/formStyles.css'
+import '../assets/css/formStyles.css'
 
-import "../../assets/css/loginStyle.css";
+import "../assets/css/loginStyle.css";
 // import { Nav } from "../../components/Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,38 +9,45 @@ import {
   faPenToSquare,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
+
 import { useCallback, useRef, useState, useEffect } from "react";
 
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
-import spanishLanguage from "../../assets/datatableSpanish";
-import { getAllUsers } from '../../Service/Services';
+import spanishLanguage from "../assets/datatableSpanish";
+// import { getAllUsers } from "../../services/userService";
+import { crearMueble, muebles } from '../Service/Services';
 
-
-const Usuarios = () => {
+const Mueble = () => {
   DataTable.use(DT);
   const documentoidRef = useRef(null);
   const nombreRef = useRef(null);
   const usuarioRef = useRef(null);
   const passwordRef = useRef(null);
   const btnFinForm = useRef(null);
-
   const tableRef = useRef(null);
 
-  const [dataUsers, setDataUsers] = useState()
+  const [dataUsers, setDataUsers] = useState([]);
   const [accion, setAccion ] = useState("Nuevo");
   const [btnNewDisabled, setBtnNewDisabled] = useState(false);
   const [btnEditDisabled, setBtnEditDisabled] = useState(true);
   const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
   const [btnSend, setBtnSend] = useState(true);
 
-  const [inputDocumentoId, setinputDocumentoId] = useState("");
-  const [inputNombre, setinputNombre] = useState("");
-  const [inputUsuario, setinputUsuario] = useState("");
-  const [inputPassword, setinputPassword] = useState("");
 
+ 
+  //
+  // const [muebles, setMuebles] = useState([]);
+  const [inputIdMueble, setinputIdMueble] = useState("");
+  const [inputNombre, setinputNombre] = useState("");
+  const [inputTipo, setinputTipo] = useState("");
+  const [inputEstado, setinputEstado] = useState("");
+  const [inputFechaAdquisicion, setinputFechaAdquisicion] = useState("");
+  const [inputValorCompra, setinputValorCompra] = useState("");
+  const [inputIdSede, setinputIdSede] = useState("");
+  
 
   const handleClickNew = () => {
     setBtnNewDisabled(true);
@@ -54,10 +61,16 @@ const Usuarios = () => {
     setBtnCancelDisabled(true);
     setBtnEditDisabled(true);
     setBtnSend(true);
-    setinputDocumentoId("");
+
+    
+    setinputIdMueble("");
     setinputNombre("");
-    setinputUsuario("");
-    setinputPassword("");
+    setinputTipo("");
+    setinputEstado("");
+    setinputFechaAdquisicion("");
+    setinputValorCompra("");
+    setinputIdSede("");
+
     setAccion("Nuevo")
 
     const table = $(tableRef.current).DataTable();
@@ -85,36 +98,76 @@ const Usuarios = () => {
     nombreRef.current.focus(); 
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-  }
+
+    
+    const handleSubmit = async (e) => {
+      e.preventDefault();
+    
+      try {
+        const nuevoMueble = {
+          Id_mueble: inputIdMueble,
+          Nombre: inputNombre,
+          Tipo: inputTipo,
+          Estado: inputEstado,
+          Fecha_adquisicion: inputFechaAdquisicion,
+          Valor_compra: inputValorCompra,
+          Id_sede: inputIdSede,
+        }
+        console.log('Datos', nuevoMueble);
+        await crearMueble(nuevoMueble);
+        console.log('Mueble creado', nuevoMueble);
+        const data = await getMuebles();
+        const formattedData = data.map(mueble => ({
+          ...mueble, 
+          Fecha_adquisicion: mueble.Fecha_adquisicion.split('T')[0],  
+        }));
+
+        setDataUsers(formattedData);
+
+        handleClickCancel();
+        alert("Mueble creado con éxito");
+      } catch (error) {
+        console.log("Error al crear el mueble", error);
+      }
+    };
+    
+
 
   const columns = [
-    { title: "Documento", data: "Documento" },
-    { title: "Nombre", data: "Nombres" },
-    { title: "Usuario", data: "Usuario" },
-    { title: "Contraseña", data: "Password" },
+    { title: "Id Mueble", data: "Id_mueble" },
+    { title: "Nombre", data: "Nombre" },
+    { title: "Tipo", data: "Tipo" },
+    { title: "Estado", data: "Estado" },
+    { title: "Fecha Adquisicion", data: "Fecha_adquisicion" },
+    { title: "Valor Compra", data: "Valor_compra" },
+    { title: "Id Sede", data: "Id_sede" },
+
   ];
 
   const handleRowSelect = (event, dt, type, indexes) => {
     const data = dt.data();
     setBtnEditDisabled(false);
-    setinputDocumentoId(data.Documento)
-    setinputNombre(data.Nombres)
-    setinputUsuario(data.Usuario)
-    setinputPassword(data.Password)
+
+    setinputIdMueble(data.Id_mueble);
+    setinputNombre(data.Nombre);
+    setinputTipo(data.Tipo);
+    setinputEstado(data.Estado);
+    setinputFechaAdquisicion(data.Fecha_adquisicion);
+    setinputValorCompra(data.Valor_compra);
+    setinputIdSede(data.Id_sede);
+
   }
+
   
-     useEffect(() => {
-     const fetchUsers = async ()=>{
-       try { 
-           const datos = await getAllUsers()
-           console.log('datos', datos)
-           setDataUsers(datos)
-       } catch (error) {
-         alert(error)
-       }
-     }
+    useEffect(() => {
+    const fetchUsers = async ()=>{
+      try { 
+          const datos = await muebles()
+          setDataUsers(datos)
+      } catch (error) {
+        alert(error)
+      }
+    }
 
     fetchUsers();
   }, [])
@@ -155,23 +208,23 @@ const Usuarios = () => {
 
             <div className="container mt-5">
               <form  onSubmit={handleSubmit} >
-                <div className="col-1">
-                  <label className="form-label">DocumentoID</label>
-                </div>
                 <div className="col-12">
+                  <label className="form-label">Id Mueble </label>
+                </div>
+                <div className="col-8">
                   <input
                     ref={documentoidRef}
                     className="form-control inputLogin"
-                    placeholder="Ingresa Documento"
+                    placeholder="Ingresa Id"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputDocumentoId}
-                    onChange={(e) => setinputDocumentoId(e.target.value)}
+                    value={inputIdMueble}
+                    onChange={(e) => setinputIdMueble(e.target.value)}
                     onBlur={handleUserBlur}
                     onKeyDown={handleUserKeyDown}
                   />
                 </div>
 
-                <div className="col-1">
+                <div className="col-10">
                   <label className="form-label">Nombre</label>
                 </div>
                 <div className="col-12">
@@ -185,31 +238,74 @@ const Usuarios = () => {
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">Usuario</label>
+                <div className="col-10">
+                  <label className="form-label">Tipo</label>
                 </div>
                 <div className="col-12">
                   <input
                   ref={usuarioRef}
                     className="form-control inputLogin"
-                    placeholder="Ingrese Usuario"
+                    placeholder="Ingrese el Tipo"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputUsuario}
-                    onChange={(e) => setinputUsuario(e.target.value)}
+                    value={inputTipo}
+                    onChange={(e) => setinputTipo(e.target.value)}
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">Contraseña</label>
+                <div className="col-10">
+                  <label className="form-label">Estado</label>
                 </div>
                 <div className="col-12">
                   <input
                     ref={passwordRef}
                     className="form-control inputLogin"
-                    placeholder="Ingrese Contraseña"
+                    placeholder="Ingrese el Estado"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputPassword}
-                    onChange={(e) => setinputPassword(e.target.value)}
+                    value={inputEstado}
+                    onChange={(e) => setinputEstado(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-10">
+                  <label className="form-label">Fecha de Adquisicion</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={passwordRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese la Fecha de Adquisicion"
+                    disabled={btnCancelDisabled ? true : false}
+                    type='date'
+                    value={inputFechaAdquisicion}
+                    onChange={(e) => setinputFechaAdquisicion(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-10">
+                  <label className="form-label">Valor</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={passwordRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese el Valor"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputValorCompra}
+                    onChange={(e) => setinputValorCompra(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-10">
+                  <label className="form-label">Id Sede</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={passwordRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese el Id de la Sede"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputIdSede}
+                    onChange={(e) => setinputIdSede(e.target.value)}
                   />
                 </div>
 
@@ -247,10 +343,13 @@ const Usuarios = () => {
               >
                 <thead>
                   <tr>
-                    <th>Documento</th>
+                    <th>Id </th>
                     <th>Nombre</th>
-                    <th>Usuario</th>
-                    <th>Contraseña</th>
+                    <th>Tipo</th>
+                    <th>Estado</th>
+                    <th>Fecha Adquisicion</th>
+                    <th>Valor Compra</th>
+                    <th>Id Sede</th>
                   </tr>
                 </thead>
               </DataTable>
@@ -261,4 +360,4 @@ const Usuarios = () => {
     </>
   );
 };
-export default Usuarios;
+export default Mueble;

@@ -1,6 +1,6 @@
-import '../../assets/css/formStyles.css'
+import '../assets/css/formStyles.css'
 
-import "../../assets/css/loginStyle.css";
+import "../assets/css/loginStyle.css";
 // import { Nav } from "../../components/Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,31 +15,34 @@ import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
-import spanishLanguage from "../../assets/datatableSpanish";
-import { getAllUsers } from '../../Service/Services';
+import spanishLanguage from "../assets/datatableSpanish";
+import { getAllAvion, insertarAvion } from '../Service/Services';
 
 
-const Usuarios = () => {
+const Aviones = () => {
   DataTable.use(DT);
-  const documentoidRef = useRef(null);
+  const placaRef = useRef(null);
   const nombreRef = useRef(null);
-  const usuarioRef = useRef(null);
-  const passwordRef = useRef(null);
+  const estadoRef = useRef(null);
+  const fecha_adquisicionRef = useRef(null);
+  const tipo_vehiculoRef = useRef(null);
+  const cod_aeropuertoRef = useRef(null);
   const btnFinForm = useRef(null);
-
   const tableRef = useRef(null);
 
-  const [dataUsers, setDataUsers] = useState()
+  const [dataAviones, setDataAviones] = useState()
   const [accion, setAccion ] = useState("Nuevo");
   const [btnNewDisabled, setBtnNewDisabled] = useState(false);
   const [btnEditDisabled, setBtnEditDisabled] = useState(true);
   const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
   const [btnSend, setBtnSend] = useState(true);
 
-  const [inputDocumentoId, setinputDocumentoId] = useState("");
+  const [inputPlaca, setinputPlaca] = useState("");
   const [inputNombre, setinputNombre] = useState("");
-  const [inputUsuario, setinputUsuario] = useState("");
-  const [inputPassword, setinputPassword] = useState("");
+  const [inputEstado, setinputEstado] = useState("");
+  const [inputFechaAdquision, setinputFechaAdquision] = useState("");
+  const [inputTipoVehiculo, setinputTipoVehiculo] = useState("");
+  const [inputCodAeropuerto, setinputCodAeropuerto] = useState("");
 
 
   const handleClickNew = () => {
@@ -54,10 +57,12 @@ const Usuarios = () => {
     setBtnCancelDisabled(true);
     setBtnEditDisabled(true);
     setBtnSend(true);
-    setinputDocumentoId("");
+    setinputPlaca("");
     setinputNombre("");
-    setinputUsuario("");
-    setinputPassword("");
+    setinputEstado("");
+    setinputFechaAdquision("");
+    setinputTipoVehiculo("");
+    setinputCodAeropuerto("");
     setAccion("Nuevo")
 
     const table = $(tableRef.current).DataTable();
@@ -85,43 +90,75 @@ const Usuarios = () => {
     nombreRef.current.focus(); 
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-  }
+
+    try {
+      const nuevoAvion = {
+        Placa: inputPlaca,
+        Nombre: inputNombre,
+        Estado: inputEstado,
+        Fecha_adquisicion: inputFechaAdquision,
+        Tipo_vehiculo: inputTipoVehiculo,
+        Cod_aeropuerto: inputCodAeropuerto,
+      }
+      console.log('Datos', nuevoAvion);
+      await insertarAvion(nuevoAvion);
+      console.log('Avion creado', nuevoAvion);
+      const data = await getAllAvion();
+      const formattedData = data.map(avion => ({
+        ...avion,
+        Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
+      }));
+
+      setDataAviones(formattedData);
+
+      handleClickCancel();
+      alert('Avion creado con exito');
+    } catch (error) {
+      console.log('Error al crear el avion', error);
+    }
+  };
 
   const columns = [
-    { title: "Documento", data: "Documento" },
-    { title: "Nombre", data: "Nombres" },
-    { title: "Usuario", data: "Usuario" },
-    { title: "Contraseña", data: "Password" },
+    { title: "Placa", data: "Placa" },
+    { title: "Nombre", data: "Nombre" },
+    { title: "Estado", data: "Estado" },
+    { title: "Fecha Adquisicion", data: "Fecha_adquisicion" },
+    { title: "Tipo Vehiculo", data: "Tipo_vehiculo" },
+    { title: "Cod. Aeropuerto", data: "Cod_aeropuerto"}
   ];
 
   const handleRowSelect = (event, dt, type, indexes) => {
     const data = dt.data();
     setBtnEditDisabled(false);
-    setinputDocumentoId(data.Documento)
-    setinputNombre(data.Nombres)
-    setinputUsuario(data.Usuario)
-    setinputPassword(data.Password)
+
+    setinputPlaca(data.Placa)
+    setinputNombre(data.Nombre)
+    setinputEstado(data.Estado)
+    setinputFechaAdquision(data.Fecha_adquisicion)
+    setinputTipoVehiculo(data.Tipo_vehiculo)
+    setinputCodAeropuerto(data.Cod_aeropuerto)
   }
   
-     useEffect(() => {
-     const fetchUsers = async ()=>{
-       try { 
-           const datos = await getAllUsers()
-           console.log('datos', datos)
-           setDataUsers(datos)
-       } catch (error) {
-         alert(error)
+   useEffect(()=>{
+      const fetchAviones = async ()=>{
+        try {
+          const data = await getAllAvion();
+          const formattedData = data.map(avion => ({
+            ...avion,
+            Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
+          }));
+          setDataAviones(formattedData);
+        } catch (error) {
+          setError(error);
+        }
        }
-     }
+       fetchAviones();
+   }, []);
 
-    fetchUsers();
-  }, [])
+    
   
-
-
-
   return (
     <>
       {/* <Nav /> */}
@@ -155,23 +192,23 @@ const Usuarios = () => {
 
             <div className="container mt-5">
               <form  onSubmit={handleSubmit} >
-                <div className="col-1">
-                  <label className="form-label">DocumentoID</label>
+                <div className="col-10">
+                  <label className="form-label">Placa</label>
                 </div>
                 <div className="col-12">
                   <input
-                    ref={documentoidRef}
+                    ref={placaRef}
                     className="form-control inputLogin"
-                    placeholder="Ingresa Documento"
+                    placeholder="Ingresa Placa"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputDocumentoId}
-                    onChange={(e) => setinputDocumentoId(e.target.value)}
+                    value={inputPlaca}
+                    onChange={(e) => setinputPlaca(e.target.value)}
                     onBlur={handleUserBlur}
                     onKeyDown={handleUserKeyDown}
                   />
                 </div>
 
-                <div className="col-1">
+                <div className="col-10">
                   <label className="form-label">Nombre</label>
                 </div>
                 <div className="col-12">
@@ -185,31 +222,61 @@ const Usuarios = () => {
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">Usuario</label>
+                <div className="col-10">
+                  <label className="form-label">Estado</label>
                 </div>
                 <div className="col-12">
                   <input
-                  ref={usuarioRef}
+                  ref={estadoRef}
                     className="form-control inputLogin"
-                    placeholder="Ingrese Usuario"
+                    placeholder="Ingrese el estado"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputUsuario}
-                    onChange={(e) => setinputUsuario(e.target.value)}
+                    value={inputEstado}
+                    onChange={(e) => setinputEstado(e.target.value)}
                   />
                 </div>
 
-                <div className="col-1">
-                  <label className="form-label">Contraseña</label>
+                <div className="col-10">
+                  <label className="form-label">Fecha Adquisición</label>
                 </div>
                 <div className="col-12">
                   <input
-                    ref={passwordRef}
+                    ref={fecha_adquisicionRef}
                     className="form-control inputLogin"
-                    placeholder="Ingrese Contraseña"
+                    placeholder="Fecha"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputPassword}
-                    onChange={(e) => setinputPassword(e.target.value)}
+                    type='date'
+                    value={inputFechaAdquision}
+                    onChange={(e) => setinputFechaAdquision(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-10">
+                  <label className="form-label">Tipo Vehiculo</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={tipo_vehiculoRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese el tipo de vehiculo"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputTipoVehiculo}
+                    onChange={(e) => setinputTipoVehiculo(e.target.value)}
+                  />
+                </div>
+
+                
+                <div className="col-10">
+                  <label className="form-label">Codigo de Aeropuerto</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={cod_aeropuertoRef}
+                    className="form-control inputLogin"
+                    placeholder="Codigo"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputCodAeropuerto}
+                    onChange={(e) => setinputCodAeropuerto(e.target.value)}
                   />
                 </div>
 
@@ -229,7 +296,7 @@ const Usuarios = () => {
           <div className="containerPart12 col-7">
             <div className="container">
               <DataTable
-                data={dataUsers}
+                data={dataAviones}
                 columns={columns}
                 className="display"
                 options={{
@@ -247,10 +314,12 @@ const Usuarios = () => {
               >
                 <thead>
                   <tr>
-                    <th>Documento</th>
+                    <th>Placa</th>
                     <th>Nombre</th>
-                    <th>Usuario</th>
-                    <th>Contraseña</th>
+                    <th>Estado</th>
+                    <th>Fecha Adquisición</th>
+                    <th>Tipo de vehiculo</th>
+                    <th>Codigo del Aeropuerto</th>
                   </tr>
                 </thead>
               </DataTable>
@@ -261,4 +330,4 @@ const Usuarios = () => {
     </>
   );
 };
-export default Usuarios;
+export default Aviones;

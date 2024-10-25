@@ -8,6 +8,11 @@ import Registro from './Pages/Registro';
 import Main from './Pages/Main';
 import CambiarContrasena from './Pages/CambiarContrasena';
 import Usuarios from './Pages/Usuario/Usuarios';
+import Aviones from './Pages/Aviones';
+import Mueble from './Pages/Mueble';
+import Nomina from './Pages/InformeNomina';
+
+
 
 const NotFound = () => {
     return <h1>404 - Página no encontrada</h1>;
@@ -33,6 +38,9 @@ const MainContent = () => {
                 <Route path="/cambiar-contrasena" element={<CambiarContrasena />} />
                 <Route path='/home' element={<Principal />} />
                 <Route path='/usuarios' element={<Usuarios />} />
+                <Route path='/muebles' element={<Mueble />} />
+                <Route path='/aviones' element={<Aviones/>} />
+                <Route path='/nomina' element={<Nomina/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

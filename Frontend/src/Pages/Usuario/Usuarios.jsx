@@ -1,5 +1,4 @@
 import '../../assets/css/formStyles.css'
-
 import "../../assets/css/loginStyle.css";
 // import { Nav } from "../../components/Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -16,21 +15,20 @@ import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
 import spanishLanguage from "../../assets/datatableSpanish";
-import { getAllUsers } from '../../Service/Services';
-
+import { Users } from '../../Service/Services';
 
 const Usuarios = () => {
   DataTable.use(DT);
   const documentoidRef = useRef(null);
   const nombreRef = useRef(null);
-  const usuarioRef = useRef(null);
-  const passwordRef = useRef(null);
+  const contrasenaRef = useRef(null);
+  const correoRef = useRef(null);
   const btnFinForm = useRef(null);
 
   const tableRef = useRef(null);
 
   const [dataUsers, setDataUsers] = useState()
-  const [accion, setAccion ] = useState("Nuevo");
+  const [accion, setAccion] = useState("Nuevo");
   const [btnNewDisabled, setBtnNewDisabled] = useState(false);
   const [btnEditDisabled, setBtnEditDisabled] = useState(true);
   const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
@@ -38,8 +36,8 @@ const Usuarios = () => {
 
   const [inputDocumentoId, setinputDocumentoId] = useState("");
   const [inputNombre, setinputNombre] = useState("");
-  const [inputUsuario, setinputUsuario] = useState("");
-  const [inputPassword, setinputPassword] = useState("");
+  const [inputContrasena, setInputContrasena] = useState("");
+  const [inputCorreo, setInputCorreo] = useState("");
 
 
   const handleClickNew = () => {
@@ -56,8 +54,8 @@ const Usuarios = () => {
     setBtnSend(true);
     setinputDocumentoId("");
     setinputNombre("");
-    setinputUsuario("");
-    setinputPassword("");
+    setInputContrasena("");
+    setInputCorreo("");
     setAccion("Nuevo")
 
     const table = $(tableRef.current).DataTable();
@@ -73,16 +71,14 @@ const Usuarios = () => {
     setAccion("Editar")
   };
 
-
-  
   const handleUserKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      nombreRef.current.focus(); 
+      nombreRef.current.focus();
     }
   };
   const handleUserBlur = () => {
-    nombreRef.current.focus(); 
+    nombreRef.current.focus();
   };
 
   const handleSubmit = (e) => {
@@ -90,19 +86,19 @@ const Usuarios = () => {
   }
 
   const columns = [
-    { title: "Documento", data: "Documento" },
-    { title: "Nombre", data: "Nombres" },
-    { title: "Usuario", data: "Usuario" },
-    { title: "Contraseña", data: "Password" },
+    { title: "Documento", data: "Id_usuario" },
+    { title: "Nombre", data: "Nombre" },
+    { title: "Contraseña", data: "Contrasena" },
+    { title: "Correo", data: "Correo" },
   ];
 
   const handleRowSelect = (event, dt, type, indexes) => {
     const data = dt.data();
     setBtnEditDisabled(false);
-    setinputDocumentoId(data.Documento)
-    setinputNombre(data.Nombres)
-    setinputUsuario(data.Usuario)
-    setinputPassword(data.Password)
+    setinputDocumentoId(data.Id_usuario)
+    setinputNombre(data.Nombre)
+    setInputContrasena(data.Contrasena)
+    setInputCorreo(data.Correo)
   }
   
      useEffect(() => {
@@ -137,8 +133,8 @@ const Usuarios = () => {
               >
                 <FontAwesomeIcon icon={faFile} /> Nuevo
               </button>
-              <button 
-                className="btn btnControlFrom" 
+              <button
+                className="btn btnControlFrom"
                 disabled={btnEditDisabled}
                 onClick={handleClickEdit}
               >
@@ -154,7 +150,7 @@ const Usuarios = () => {
             </div>
 
             <div className="container mt-5">
-              <form  onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit} >
                 <div className="col-1">
                   <label className="form-label">DocumentoID</label>
                 </div>
@@ -186,30 +182,30 @@ const Usuarios = () => {
                 </div>
 
                 <div className="col-1">
-                  <label className="form-label">Usuario</label>
-                </div>
-                <div className="col-12">
-                  <input
-                  ref={usuarioRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Usuario"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputUsuario}
-                    onChange={(e) => setinputUsuario(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-1">
                   <label className="form-label">Contraseña</label>
                 </div>
                 <div className="col-12">
                   <input
-                    ref={passwordRef}
+                    ref={contrasenaRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese Usuario"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputContrasena}
+                    onChange={(e) => setInputContrasena(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-1">
+                  <label className="form-label">Correo</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={correoRef}
                     className="form-control inputLogin"
                     placeholder="Ingrese Contraseña"
                     disabled={btnCancelDisabled ? true : false}
-                    value={inputPassword}
-                    onChange={(e) => setinputPassword(e.target.value)}
+                    value={inputCorreo}
+                    onChange={(e) => setInputCorreo(e.target.value)}
                   />
                 </div>
 
@@ -247,10 +243,10 @@ const Usuarios = () => {
               >
                 <thead>
                   <tr>
-                    <th>Documento</th>
+                    <th>ID</th>
                     <th>Nombre</th>
-                    <th>Usuario</th>
                     <th>Contraseña</th>
+                    <th>Correo</th>
                   </tr>
                 </thead>
               </DataTable>

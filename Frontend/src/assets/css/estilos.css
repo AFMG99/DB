@@ -5,41 +5,39 @@
 }
 
 .navegacion {
-    background-color: #a6d6a6;
+    background-color: #4bb5c1;
     padding: 0 30px;
-    border-bottom: 2px solid #686363;
+    border-bottom: 3px solid #034f5f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .navegacion .nav-link {
-    color: #000;
-    font-size: 17px;
+    color: #fff;
+    font-size: 18px;
     margin-right: 10px;
-    transition: color 0.3s ease;
+    margin-right: 15px;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .navegacion .nav-link:hover {
-    background: #006400;
-    color: #90EE90;
+    background: #037a8c;
+    color: #e0f7fa;
     border-radius: 8px;
+    padding: 8px 12px;
+    transform: scale(1.1);
 }
 
 .imgN {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 /*Componente Header*/
-.header {
-    background-color: #006400;
-    color: white;
-    border-bottom: 2px solid #444;
-    padding: 10px;
-}
-
-.header-title {
-    font-size: 2rem;
-    font-weight: bold;
-}
 
 .perfil-imagen {
     width: 50px;
@@ -47,7 +45,9 @@
 }
 
 .offcanvas-header {
-    background-color: #006400;
+    /* background-color: #34495e; */
+    background-color: #4bb5c1;
+    border-bottom: 3px solid #034f5f;
     color: white;
 }
 
@@ -55,14 +55,42 @@
     background-color: #f8f9fa;
 }
 
+.perfil {
+    display: flex;
+    align-items: center;
+}
+
+.perfil-imagen {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
 .perfil-nombre {
-    font-size: 24px;
+    font-size: 1.2rem;
     font-weight: bold;
-    margin-bottom: 10px;
 }
 
 .btn-danger {
     font-weight: bold;
+    background-color: #e74c3c;
+    border: none;
+    padding: 8px 15px;
+    width: 100%;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.offcanvas {
+    max-width: 300px;
 }
 
 
@@ -88,14 +116,6 @@
 .busqueda input {
     padding: 10px;
     font-size: 1rem;
-}
-
-.busqueda button {
-    background-color: #006400;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
 }
 
 .imagen {
@@ -128,144 +148,484 @@
     margin-bottom: 10px;
 }
 
-/* Pantalla login */
+
+
 .login-page {
-    background-color: #006400;
-    margin: 0;
-    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f8ff;
 }
 
 .login-image {
-    background-color: #006400;
+    flex: 1;
+    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
 .login-image img {
-    border-radius: 50px;
-    margin: auto;
-    width: 60%;
-    height: 70%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
 }
 
 .div {
-    margin: 0;
-    width: 50%;
-    height: 100%;
-    padding: 70px;
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.login-box {
-    margin: 50px 0;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    padding: 20px;
-    background: #ffffff;
-
-}
-
-.login-box h2 {
-    margin-top: 50px;
-}
-
-.form {
-    margin: 40px;
-    padding-bottom: 10px;
-}
-
-.form .user,
-.pass {
-    padding-bottom: 15px;
-}
-
-.form-label {
-    font-weight: bold;
-}
-
-.text-success {
-    color: #006400;
-}
-
-.btn-outline-success {
-    border-color: #006400;
-    color: #006400;
-}
-
-.btn-outline-success:hover {
-    background-color: #006400;
-    color: white;
-}
-
-/* Pantalla Registro*/
-.registro-page {
-    background-color: #006400;
-    margin: 0;
-    display: flex;
-    min-height: 100vh;
-}
-
-.registro-form {
-    background-color: #ffffff;
-    width: 50%;
-    margin: 40px auto;
-    padding: 30px 60px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Pantalla Recuperar contraseña*/
-.recuperar-page {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #006400;
-    min-height: 100vh;
+}
+
+.login-box {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.btn-success {
+    background-color: #037a8c;
+    border-color: #037a8c;
+}
+
+.btn-success:hover {
+    background-color: #037a8c;
+}
+
+.text-danger {
+    color: #dc3545;
+}
+
+.user, .pass {
+    margin-bottom: 20px;
+}
+
+.form-check-label {
+    color: #333;
+}
+
+.text-success {
+    color: #037a8c !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mt-4 {
+    margin-top: 1.5rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.mb-3 {
+    margin-bottom: 1rem;
+}
+
+img.img-fluid {
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #037a8c;
+    border: none;
+    color: white;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #037a8c;
+}
+
+.forgot-password {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #333;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    color: #007bff;
+}
+
+.register-option {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.register-option p {
+    font-size: 14px;
+    color: #333;
+}
+
+.register-option a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.register-option a:hover {
+    text-decoration: underline;
+}
+
+.recuperar-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f8ff;
 }
 
 .recuperar-container {
-    background: white;
-    padding: 40px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.recuperar-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 10px;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.btn-success {
+    background-color: #037a8c;
+    border: none;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.alert {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.text-center a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+.registro-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f0f8ff;
+}
+
+.registro-form {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.busqueda {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.input-busqueda {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 300px;
+}
+
+.imgB {
+    width: 20px;
+    height: auto;
+}
+
+.imagen {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.imagen img {
+    max-width: 100%;
+    height: auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.recuperar-form .form-grup {
-    margin: 35px 0;
+.contenido {
+    display: flex;
+    justify-content: space-around;
+    margin: 20px 0;
 }
 
-/*Pantalla Admon*/
-.barra {
-    background: #c0c7c0;
+.cart {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 200px;
+}
+
+.cart:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart img {
+    max-width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.busqueda {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.input-busqueda {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    width: 300px;
+}
+
+.cart {
+    background-color: #f8f9fa;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    width: 150px;
+}
+
+.cart:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.cart img {
+    max-width: 40px;
+    height: auto;
+    margin-bottom: 8px;
+}
+
+.cart h3 {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.cart p {
+    font-size: 0.85rem;
     margin: 0;
 }
 
-.container-barra {
-    width: 80%;
-    margin: 10px auto;
-    position: sticky;
-    top: 0;
-    height: 75vh;
-    overflow: auto;
-}
-
-.list-group-item {
-    background-color: #c0c7c0;
-    color: #636c76;
-    font-size: 20px;
-    border: none;
-    padding: 10px 15px;
+.busqueda {
+    display: flex;
+    align-items: center;
+    background-color: #f1f4f9;
+    border-radius: 8px;
+    padding: 8px;
     width: 100%;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.list-group-item:hover {
-    background-color: #006400;
-    color: white;
+.imgB {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    opacity: 0.6;
 }
 
-.container-estadistica {
-    margin: 10px;
+.input-busqueda {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-size: 16px;
+    color: #333;
+    background-color: transparent;
+}
+
+select {
+    margin-right: 8px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #555;
+    background-color: #fff;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+select:hover {
+    border-color: #999;
+}
+
+.busqueda .input-busqueda {
+    padding: 8px 10px;
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    outline: none;
+    width: 180px;
+    box-sizing: border-box;
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 250px;
+    margin: 20px auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.calendar-header button {
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    background-color: #037a8c;
+    border-radius: 3px;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-day, .calendar-date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+}
+
+.calendar-day {
+    font-weight: bold;
+    color: #555;
+}
+
+.calendar-date {
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.calendar-date:hover {
+    background-color: #e0f7e0;
+}
+
+.calendar-date.selected {
+    background-color: #037a8c;
+    color: #fff;
+}
+
+.contenido-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.calendar {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.contenido-lateral {
+    display: flex;
+    flex-direction: column;
+}
+
+.cart {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.calendar-header h3 {
+    font-size: 8px;
+    margin: 10px 0;
 }

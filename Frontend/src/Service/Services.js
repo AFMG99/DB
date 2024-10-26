@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/';
+const API_URL = 'http://localhost:8085/';
 
 // Modulo de Login
 export const loginUser = async (username, password) => {
@@ -105,7 +105,6 @@ export const crearMueble = async (mueble) => {
 }
 
 export const modificarMueble = async (mueble) => {
-    // alert("=====>")
     const response = await axios.put(`${API_URL}modificar-mueble`, mueble);
     return response.data;
 }

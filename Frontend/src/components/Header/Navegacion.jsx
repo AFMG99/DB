@@ -76,10 +76,26 @@ const Navegacion = () => {
                                     <li>
                                         <Link to="/clientes" className="dropdown-item">Clientes</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/aviones" className="dropdown-item">Aviones</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/muebles" className="dropdown-item">Muebles</Link>
+                                    </li>
                                 </ul>
                             </li>
-                            <li>
-                                <Link to="/vuelos" className="nav-link">Vuelos</Link>
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Informes
+                                </a>
+                                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li>
+                                        <Link to="/vuelos" className="dropdown-item">Vuelos</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/nomina" className="dropdown-item">Nominas</Link>
+                                    </li>
+                                </ul>
                             </li>
                         </ul>
                     </div>

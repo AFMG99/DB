@@ -291,7 +291,7 @@ const Aviones = () => {
                   className="btn w-100 btnGuardar"
                   disabled={btnSend}
                 >
-                  {(accion == "Editar") ? "Editar" : "Agregar"}
+                  {(accion == "Editar") ? "Actualizar" : "Agregar"}
                 </button>
               </form>
             </div>

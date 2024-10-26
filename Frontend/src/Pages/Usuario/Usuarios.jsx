@@ -15,7 +15,7 @@ import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
 import spanishLanguage from "../../assets/datatableSpanish";
-import { Users } from '../../Service/Services';
+import { getAllUsers } from '../../Service/Services';
 
 const Usuarios = () => {
   DataTable.use(DT);

@@ -1,9 +1,6 @@
 import React from 'react'
 import '../../src/assets/css/estilos.css'
 import imagen from '../../src/assets/img/programacion.jpg'
-import icono1 from '../../src/assets/img/fire.png'
-import icono2 from '../../src/assets/img/escucha.png'
-import icono3 from '../../src/assets/img/busqueda.png'
 import { useNavigate } from 'react-router-dom'
 
 const Principal = () => {

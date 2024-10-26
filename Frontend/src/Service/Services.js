@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8085/';
+const API_URL = 'http://localhost:3000/';
 
 // Modulo de Login
 export const loginUser = async (username, password) => {
@@ -91,5 +91,46 @@ export const crearCliente = async (cliente) => {
 
 export const modificarCliente = async (cliente) => {
     const response = await axios.put(`${API_URL}actulizar-cliente`, cliente);
+    return response.data;
+}
+ 
+export const muebles = async () => {
+    const response = await axios.get(`${API_URL}muebles`);
+    return response.data;
+}
+
+export const crearMueble = async (mueble) => {
+    const response = await axios.post(`${API_URL}mueble`, mueble);
+    return response.data;
+}
+
+export const modificarMueble = async (mueble) => {
+    // alert("=====>")
+    const response = await axios.put(`${API_URL}modificar-mueble`, mueble);
+    return response.data;
+}
+
+export const getAllUsers = async () => {
+    const response = await axios.get(`${API_URL}usuarios`);
+    return response.data;
+}
+
+export const getAllAvion = async ()=>{
+    const response = await axios.get(`${API_URL}aviones`);
+    return response.data;
+}
+
+export const insertarAvion = async (avion) => {
+    const response = await axios.post(`${API_URL}avion`, avion);
+    return response.data;
+}
+
+export const infoNomina = async()=>{
+    const response = await axios.get(`${API_URL}nomina`, infoNomina);
+    return response.data;
+}
+
+export const modificarAvion = async (avion) => {
+    const response = await axios.put(`${API_URL}modificar-avion`, avion);
     return response.data;
 }

@@ -100,18 +100,23 @@ const Usuarios = () => {
     setInputContrasena(data.Contrasena)
     setInputCorreo(data.Correo)
   }
+  
+     useEffect(() => {
+     const fetchUsers = async ()=>{
+       try { 
+           const datos = await getAllUsers()
+           console.log('datos', datos)
+           setDataUsers(datos)
+       } catch (error) {
+         alert(error)
+       }
+     }
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const datos = await Users();
-        setDataUsers(datos)
-      } catch (error) {
-        alert(error)
-      }
-    }
     fetchUsers();
   }, [])
+  
+
+
 
   return (
     <>

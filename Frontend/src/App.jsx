@@ -10,6 +10,11 @@ import Empleados from './Pages/Empleados';
 import Sedes from './Pages/Sedes';
 import Vuelos from './Pages/Vuelos';
 import Cliente from './Pages/Cliente';
+import Aviones from './Pages/Aviones';
+import Mueble from './Pages/Mueble';
+import Nomina from './Pages/InformeNomina';
+
+
 
 const NotFound = () => {
     return <h1>404 - Página no encontrada</h1>;
@@ -37,6 +42,9 @@ const MainContent = () => {
                 <Route path='/sedes' element={<Sedes />} />
                 <Route path='/vuelos' element={<Vuelos />} />
                 <Route path='/clientes' element={<Cliente />} />
+                <Route path='/muebles' element={<Mueble />} />
+                <Route path='/aviones' element={<Aviones/>} />
+                <Route path='/nomina' element={<Nomina/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

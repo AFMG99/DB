@@ -73,6 +73,9 @@ const Navegacion = () => {
                                     <li>
                                         <Link to="/sedes" className="dropdown-item">Sedes</Link>
                                     </li>
+                                    <li>
+                                        <Link to="/clientes" className="dropdown-item">Clientes</Link>
+                                    </li>
                                 </ul>
                             </li>
                             <li>

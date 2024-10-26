@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { crearEmpleado, getAllEmpleados, consultarEmpleado, modificarEmpleado } from '../Service/Services';
+import { crearEmpleado, getAllEmpleados, modificarEmpleado } from '../Service/Services';
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
@@ -71,16 +71,16 @@ const Empleados = () => {
       } else if (accion === 'Editar') {
         await modificarEmpleado(empleado);
         alert("Empleado actualizado exitosamente");
-      } 
+      }
 
       const data = await getAllEmpleados();
-        const formattedData = data.map(empleado => ({
-          ...empleado,
-          Fecha_nacimiento: empleado.Fecha_nacimiento.split('T')[0],
-        }));
-      
-        setEmpleados(formattedData);
-        handleClickCancel();
+      const formattedData = data.map(empleado => ({
+        ...empleado,
+        Fecha_nacimiento: empleado.Fecha_nacimiento.split('T')[0],
+      }));
+
+      setEmpleados(formattedData);
+      handleClickCancel();
     } catch (error) {
       console.error("Error al procesar empleado:", error);
     }
@@ -180,105 +180,116 @@ const Empleados = () => {
 
             <div className="container mt-5">
               <form onSubmit={handleSubmit}>
-                <div className="col-12">
-                  <label className="form-label">Tipo Doc</label>
-                </div>
-                <div className="col-12">
-                  <select
-                    className="form-control inputLogin"
-                    disabled={btnCancelDisabled}
-                    value={inputTipo}
-                    onChange={(e) => setInputTipo(e.target.value)}
-                  >
-                    <option value="CC">Cédula de Ciudadanía</option>
-                    <option value="CE">Cédula de Extranjería</option>
-                    <option value="TI">Tarjeta de Identidad</option>
-                    <option value="NIT">NIT</option>
-                  </select>
+                <div className="row">
+
+                  <div className="col-2">
+                    <label className="form-label">Tipo Doc</label>
+                  </div>
+                  <div className="col-6">
+                    <label className="form-label">Cedula</label>
+                  </div>
+                  <div className="col-4">
+                    <label className="form-label">Fecha de Nacimiento.</label>
+                  </div>
+
+
+                  <div className="col-2">
+                    <select
+                      className="form-control inputLogin"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputTipo}
+                      onChange={(e) => setInputTipo(e.target.value)}
+                    >
+                      <option value="CC">CC</option>
+                      <option value="CE">CE</option>
+                      <option value="TI">TI</option>
+                      <option value="NIT">NIT</option>
+                    </select>
+                  </div>
+
+
+                  <div className="col-6">
+                    <input
+                      ref={documentoidRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese Cedula"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputDocumentoId}
+                      onChange={(e) => setInputDocumentoId(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="col-4">
+                    <input
+                      ref={fechaRef}
+                      className="form-control inputLogin"
+                      type="date"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputFecha}
+                      onChange={(e) => setInputFecha(e.target.value)}
+                    />
+                  </div>
+
                 </div>
 
-                <div className="col-12">
-                  <label className="form-label">Cedula</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={documentoidRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Cedula"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputDocumentoId}
-                    onChange={(e) => setInputDocumentoId(e.target.value)}
-                  />
+                <div className="row">
+                  <div className="col-6">
+                    <label className="form-label">Primer Nombre</label>
+                  </div>
+                  <div className="col-6">
+                    <label className="form-label">Segundo Nombre</label>
+                  </div>
+                  <div className="col-6">
+                    <input
+                      ref={primerNomRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese Primer Nombre"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputPrimerNom}
+                      onChange={(e) => setInputPrimerNom(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="col-6">
+                    <input
+                      ref={segundoNomRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese Segundo Nombre"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputSegundoNom}
+                      onChange={(e) => setInputSegundoNom(e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <div className="col-12">
-                  <label className="form-label">Primer Nombre</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={primerNomRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Primer Nombre"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputPrimerNom}
-                    onChange={(e) => setInputPrimerNom(e.target.value)}
-                  />
-                </div>
+                <div className="row">
+                  <div className="col-6">
+                    <label className="form-label">Primer Apellido</label>
+                  </div>
+                  <div className="col-6">
+                    <label className="form-label">Segundo Apellido</label>
+                  </div>
+                  <div className="col-6">
+                    <input
+                      ref={primerApeRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese Primer Apellido"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputPrimerApe}
+                      onChange={(e) => setInputPrimerApe(e.target.value)}
+                    />
+                  </div>
 
-                <div className="col-12">
-                  <label className="form-label">Segundo Nombre</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={segundoNomRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Segundo Nombre"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputSegundoNom}
-                    onChange={(e) => setInputSegundoNom(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-12">
-                  <label className="form-label">Primer Apellido</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={primerApeRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Primer Apellido"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputPrimerApe}
-                    onChange={(e) => setInputPrimerApe(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-12">
-                  <label className="form-label">Segundo Apellido</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={segundoApeRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Segundo Apellido"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputSegundoApe}
-                    onChange={(e) => setInputSegundoApe(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-12">
-                  <label className="form-label">Fecha de Nacimiento.</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={fechaRef}
-                    className="form-control inputLogin"
-                    type="date"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputFecha}
-                    onChange={(e) => setInputFecha(e.target.value)}
-                  />
+                  <div className="col-6">
+                    <input
+                      ref={segundoApeRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese Segundo Apellido"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputSegundoApe}
+                      onChange={(e) => setInputSegundoApe(e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 <br />

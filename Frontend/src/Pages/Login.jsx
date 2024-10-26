@@ -3,9 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../Service/Services';
 import '../assets/css/estilos.css';
 import imagen from '../../src/assets/img/oficina.jpg';
-import imagen2 from '../../src/assets/img/facebook.png';
-import imagen3 from '../../src/assets/img/x.png';
-import imagen4 from '../../src/assets/img/google.png';
 
 function Login() {
     const [username, setUsername] = useState('');
@@ -51,7 +48,7 @@ function Login() {
 
                 <div className="col-md-6 d-flex align-items-center justify-content-center div">
                     <div className="login-box">
-                        <h2 className="text-center text-success">Agencia de Viajes</h2> 
+                        <h2 className="text-center text-success">Agencia de Viajes</h2>
 
                         <form className='form' onSubmit={handleLogin}>
                             <div className="mb-3 user">
@@ -82,34 +79,10 @@ function Login() {
 
                             <button type="submit" className="btn btn-success w-100 mb-3">Login</button>
 
-                            <div className="d-flex justify-content-between">
-                                <div className="form-check">
-                                    <input
-                                        type="checkbox"
-                                        className="form-check-input"
-                                        id="remember"
-                                    />
-                                    <label className="form-check-label" htmlFor="remember">Recordar</label>
-                                </div>
+                            <div className="d-flex justify-content-center">
                                 <Link to="/cambiar-contrasena" className="text-success">¿Olvidaste tu Contraseña?</Link>
                             </div>
                         </form>
-{/* 
-                        <div className="text-center mt-4">
-                            <p>¿No tienes cuenta? Ir a <Link to="/registro" className="text-success">Registro</Link></p>
-                        </div> */}
-
-                        {/* <div className="d-flex justify-content-center mt-3">
-                            <button className="btn btn-outline-success me-2">
-                                <img src={imagen2} alt="facebook" />
-                            </button>
-                            <button className="btn btn-outline-success me-2">
-                                <img src={imagen3} alt="x" />
-                            </button>
-                            <button className="btn btn-outline-success">
-                                <img src={imagen4} alt="google" />
-                            </button>
-                        </div> */}
                     </div>
                 </div>
             </div>

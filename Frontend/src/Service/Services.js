@@ -72,8 +72,24 @@ export const nominas = async () => {
     return response.data;
 }
 
-// Modulo Vehiculo
+// Modulo Vuelos
 export const vuelos = async () => {
     const response = await axios.get(`${API_URL}vuelos`);
+    return response.data;
+}
+
+// Modulo Cliente
+export const clientes = async () => {
+    const response = await axios.get(`${API_URL}clientes`);
+    return response.data;
+}
+
+export const crearCliente = async (cliente) => {
+    const response = await axios.post(`${API_URL}crear-cliente`, cliente);
+    return response.data;
+} 
+
+export const modificarCliente = async (cliente) => {
+    const response = await axios.put(`${API_URL}actulizar-cliente`, cliente);
     return response.data;
 }

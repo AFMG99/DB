@@ -19,71 +19,71 @@ import { Users } from '../../Service/Services';
 
 const Usuarios = () => {
   DataTable.use(DT);
-  // const documentoidRef = useRef(null);
-  // const nombreRef = useRef(null);
-  // const contrasenaRef = useRef(null);
-  // const correoRef = useRef(null);
-  // const btnFinForm = useRef(null);
+  const documentoidRef = useRef(null);
+  const nombreRef = useRef(null);
+  const contrasenaRef = useRef(null);
+  const correoRef = useRef(null);
+  const btnFinForm = useRef(null);
 
   const tableRef = useRef(null);
 
   const [dataUsers, setDataUsers] = useState()
-  // const [accion, setAccion ] = useState("Nuevo");
-  // const [btnNewDisabled, setBtnNewDisabled] = useState(false);
-  // const [btnEditDisabled, setBtnEditDisabled] = useState(true);
-  // const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
-  // const [btnSend, setBtnSend] = useState(true);
+  const [accion, setAccion] = useState("Nuevo");
+  const [btnNewDisabled, setBtnNewDisabled] = useState(false);
+  const [btnEditDisabled, setBtnEditDisabled] = useState(true);
+  const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
+  const [btnSend, setBtnSend] = useState(true);
 
-  // const [inputDocumentoId, setinputDocumentoId] = useState("");
-  // const [inputNombre, setinputNombre] = useState("");
-  // const [inputContrasena, setInputContrasena] = useState("");
-  // const [inputCorreo, setInputCorreo] = useState("");
+  const [inputDocumentoId, setinputDocumentoId] = useState("");
+  const [inputNombre, setinputNombre] = useState("");
+  const [inputContrasena, setInputContrasena] = useState("");
+  const [inputCorreo, setInputCorreo] = useState("");
 
 
-  // const handleClickNew = () => {
-  //   setBtnNewDisabled(true);
-  //   setBtnCancelDisabled(false);
-  //   setBtnSend(false);
-  //   setAccion("Nuevo");
-  // };
+  const handleClickNew = () => {
+    setBtnNewDisabled(true);
+    setBtnCancelDisabled(false);
+    setBtnSend(false);
+    setAccion("Nuevo");
+  };
 
-  // const handleClickCancel = () => {
-  //   setBtnNewDisabled(false);
-  //   setBtnCancelDisabled(true);
-  //   setBtnEditDisabled(true);
-  //   setBtnSend(true);
-  //   setinputDocumentoId("");
-  //   setinputNombre("");
-  //   setInputContrasena("");
-  //   setInputCorreo("");
-  //   setAccion("Nuevo")
+  const handleClickCancel = () => {
+    setBtnNewDisabled(false);
+    setBtnCancelDisabled(true);
+    setBtnEditDisabled(true);
+    setBtnSend(true);
+    setinputDocumentoId("");
+    setinputNombre("");
+    setInputContrasena("");
+    setInputCorreo("");
+    setAccion("Nuevo")
 
-  //   const table = $(tableRef.current).DataTable();
-  //   table.rows({ selected: true }).deselect();
-  //   setSelectedData('')
-  // };
+    const table = $(tableRef.current).DataTable();
+    table.rows({ selected: true }).deselect();
+    setSelectedData('')
+  };
 
-  // const handleClickEdit = () => {
-  //   setBtnNewDisabled(true);
-  //   setBtnCancelDisabled(false);
-  //   setBtnSend(false);
-  //   setBtnEditDisabled(true)
-  //   setAccion("Editar")
-  // };
-  
-  // const handleUserKeyDown = (e) => {
-  //   if (e.key === "Enter") {
-  //     e.preventDefault();
-  //     nombreRef.current.focus(); 
-  //   }
-  // };
-  // const handleUserBlur = () => {
-  //   nombreRef.current.focus(); 
-  // };
+  const handleClickEdit = () => {
+    setBtnNewDisabled(true);
+    setBtnCancelDisabled(false);
+    setBtnSend(false);
+    setBtnEditDisabled(true)
+    setAccion("Editar")
+  };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault()
-  // }
+  const handleUserKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      nombreRef.current.focus();
+    }
+  };
+  const handleUserBlur = () => {
+    nombreRef.current.focus();
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+  }
 
   const columns = [
     { title: "Documento", data: "Id_usuario" },
@@ -100,27 +100,27 @@ const Usuarios = () => {
     setInputContrasena(data.Contrasena)
     setInputCorreo(data.Correo)
   }
-  
-    useEffect(() => {
-    const fetchUsers = async ()=>{
-      try { 
-          const datos = await Users();
-          setDataUsers(datos)
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const datos = await Users();
+        setDataUsers(datos)
       } catch (error) {
         alert(error)
       }
     }
     fetchUsers();
   }, [])
-  
+
   return (
     <>
       {/* <Nav /> */}
 
       <div className="containerPrincipal col-12">
         <div className="containerFormTable col-11">
-          {/* <div className="containerPart col-5"> */}
-            {/* <div className="containerButton col-12">
+          <div className="containerPart col-5">
+            <div className="containerButton col-12">
               <button
                 className="btn btnControlFrom"
                 disabled={btnNewDisabled}
@@ -128,8 +128,8 @@ const Usuarios = () => {
               >
                 <FontAwesomeIcon icon={faFile} /> Nuevo
               </button>
-              <button 
-                className="btn btnControlFrom" 
+              <button
+                className="btn btnControlFrom"
                 disabled={btnEditDisabled}
                 onClick={handleClickEdit}
               >
@@ -142,14 +142,82 @@ const Usuarios = () => {
               >
                 <FontAwesomeIcon icon={faXmark} /> Cancelar
               </button>
-            </div> */}
+            </div>
 
-            {/* <div className="container mt-5"> */}
-              
-            {/* </div>
-          </div> */}
+            <div className="container mt-5">
+              <form onSubmit={handleSubmit} >
+                <div className="col-1">
+                  <label className="form-label">DocumentoID</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={documentoidRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingresa Documento"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputDocumentoId}
+                    onChange={(e) => setinputDocumentoId(e.target.value)}
+                    onBlur={handleUserBlur}
+                    onKeyDown={handleUserKeyDown}
+                  />
+                </div>
 
-          <div className="containerPart12 col-12">
+                <div className="col-1">
+                  <label className="form-label">Nombre</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={nombreRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese Nombre"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputNombre}
+                    onChange={(e) => setinputNombre(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-1">
+                  <label className="form-label">Contraseña</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={contrasenaRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese Usuario"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputContrasena}
+                    onChange={(e) => setInputContrasena(e.target.value)}
+                  />
+                </div>
+
+                <div className="col-1">
+                  <label className="form-label">Correo</label>
+                </div>
+                <div className="col-12">
+                  <input
+                    ref={correoRef}
+                    className="form-control inputLogin"
+                    placeholder="Ingrese Contraseña"
+                    disabled={btnCancelDisabled ? true : false}
+                    value={inputCorreo}
+                    onChange={(e) => setInputCorreo(e.target.value)}
+                  />
+                </div>
+
+                <br />
+                <button
+                  ref={btnFinForm}
+                  type="submit"
+                  className="btn w-100 btnGuardar"
+                  disabled={btnSend}
+                >
+                  {(accion == "Editar") ? "Editar" : "Agregar"}
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div className="containerPart12 col-7">
             <div className="container">
               <DataTable
                 data={dataUsers}
@@ -172,8 +240,8 @@ const Usuarios = () => {
                   <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Usuario</th>
                     <th>Contraseña</th>
+                    <th>Correo</th>
                   </tr>
                 </thead>
               </DataTable>

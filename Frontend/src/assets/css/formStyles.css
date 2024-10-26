@@ -2,78 +2,87 @@
 @import 'datatables.net-responsive-dt';
 @import 'datatables.net-select-dt';
 
-tr.selected {
-  background-color:white /* Cambia a cualquier color que desees */
+.tr.selected {
+  background-color: #e8f4fa; /* Color de fondo más suave */
 }
 
-
 .containerFormTable {
-    width: 100%; 
-    /* height: calc(100vh - 100px);  */
-    margin-top: 10px;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-  }
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  border-radius: 15px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
+}
 
-  .containerPrincipal{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
+.containerPrincipal {
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Asegura que ocupe toda la altura */
+}
 
-  .containerPart{
-    background-color: white;
-    border-radius: 20px;
-    padding: 10px;
-  }
+.containerPart {
+  background-color: #f9f9f9; /* Fondo claro para mayor contraste */
+  border-radius: 15px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease; /* Animación al pasar el mouse */
+}
 
-  .containerPart12{
-    background-color: white;
-    border-radius: 20px;
-    padding: 10px;
-    margin: 0 10px;
-  }
+.containerPart:hover {
+  transform: translateY(-5px); /* Efecto de elevación al pasar el mouse */
+}
 
-  .containerButton{
-    display: flex;
-    padding: 5px;
-    
-  }
+.containerPart12 {
+  background-color: #ffffff;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 0 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
 
-  .btnControlFrom{
-    background-color: #083D77;
-    margin-left: 5px;
-    color:white;
-  }
+.containerButton {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px;
+}
 
-  .btnGuardar{
-    color:white;
-    background-color: #083D77;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.btnControlFrom {
+  background-color: #34495e; /* Azul oscuro */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  margin-left: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
 
-  }
-  .btnGuardar:hover{
-    color:black;
-    background-color: #083D77;
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+.btnControlFrom:hover {
+  background-color: #34495e; /* Azul más claro al pasar el mouse */
+  transform: scale(1.05); /* Ligera animación al pasar el mouse */
+}
 
-  }
+.btnGuardar {
+  color: white;
+  background-color: #34495e; /* Azul oscuro */
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+}
+
+.btnGuardar:hover {
+  background-color: #34495e; /* Azul más claro al pasar el mouse */
+  transform: scale(1.05); /* Animación al pasar el mouse */
+}
+

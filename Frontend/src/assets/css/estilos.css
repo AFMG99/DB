@@ -5,9 +5,9 @@
 }
 
 .navegacion {
-    background-color: #4bb5c1;
+    background-color: #132B40;
     padding: 0 30px;
-    border-bottom: 3px solid #034f5f;
+    border-bottom: 3px solid #132B40;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -23,7 +23,7 @@
 }
 
 .navegacion .nav-link:hover {
-    background: #037a8c;
+    background: #132B40;
     color: #e0f7fa;
     border-radius: 8px;
     padding: 8px 12px;
@@ -46,8 +46,8 @@
 
 .offcanvas-header {
     /* background-color: #34495e; */
-    background-color: #4bb5c1;
-    border-bottom: 3px solid #034f5f;
+    background-color: #132B40;
+    border-bottom: 3px solid #132B40;
     color: white;
 }
 
@@ -168,7 +168,7 @@
 
 .login-image img {
     max-width: 100%;
-    height: auto;
+    height: 75%;
     border-radius: 10px;
 }
 
@@ -193,12 +193,12 @@ h2 {
 }
 
 .btn-success {
-    background-color: #037a8c;
-    border-color: #037a8c;
+    background-color: #132B40;
+    border-color: #132B40;
 }
 
 .btn-success:hover {
-    background-color: #037a8c;
+    background-color: #132B40;
 }
 
 .text-danger {
@@ -214,7 +214,7 @@ h2 {
 }
 
 .text-success {
-    color: #037a8c !important;
+    color: #132B40 !important;
 }
 
 .text-center {
@@ -256,7 +256,7 @@ img.img-fluid {
 } */
 
 button:hover {
-    background-color: #037a8c;
+    background-color: #132B40;
 }
 
 .forgot-password {
@@ -268,7 +268,7 @@ button:hover {
 }
 
 .forgot-password:hover {
-    color: #007bff;
+    color: #132B40;
 }
 
 .register-option {
@@ -282,7 +282,7 @@ button:hover {
 }
 
 .register-option a {
-    color: #007bff;
+    color: #132B40;
     text-decoration: none;
 }
 
@@ -329,12 +329,12 @@ label {
 }
 
 .form-control:focus {
-    border-color: #007bff;
+    border-color: #132B40;
     outline: none;
 }
 
 .btn-success {
-    background-color: #037a8c;
+    background-color: #132B40;
     border: none;
     color: white;
     padding: 12px;
@@ -562,7 +562,7 @@ select:hover {
     font-size: 14px;
     cursor: pointer;
     border: none;
-    background-color: #037a8c;
+    background-color: #132B40;
     border-radius: 3px;
     margin: 0 5px;
     transition: background-color 0.3s;
@@ -598,7 +598,7 @@ select:hover {
 }
 
 .calendar-date.selected {
-    background-color: #037a8c;
+    background-color: #132B40;
     color: #fff;
 }
 

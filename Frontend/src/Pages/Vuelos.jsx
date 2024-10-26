@@ -11,7 +11,7 @@ import spanishLanguage from "../assets/datatableSpanish";
 import { vuelos } from '../Service/Services';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
-import logo from '../assets/img/programacion.jpg'
+import logo from '../assets/img/nova.jpg'
 import XLSX from 'xlsx-js-style';
 
 const Vuelos = () => {
@@ -42,13 +42,13 @@ const Vuelos = () => {
         const doc = new jsPDF();
         const pageWidth = doc.internal.pageSize.getWidth();
 
-        doc.addImage(logo, 'PNG', 10, 10, 30, 30);
+        doc.addImage(logo, 'PNG', 10, 8, 30, 30);
         doc.setFontSize(18);
         doc.setFont('helvetica', 'bold');
         doc.text("Reporte de Vuelos", pageWidth / 2, 20, { align: 'center' });
         doc.setFontSize(10);
         doc.setFont('helvetica', 'normal');
-        doc.text("Aerolinea Internacional", pageWidth / 2, 28, { align: 'center' });
+        doc.text("NOVA TRAVEL", pageWidth / 2, 28, { align: 'center' });
         doc.text(`Fecha de generación: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, pageWidth / 2, 35, { align: 'center' });
         doc.setLineWidth(0.5);
         doc.line(10, 40, pageWidth - 10, 40);
@@ -95,7 +95,7 @@ const Vuelos = () => {
 
         XLSX.utils.sheet_add_aoa(worksheet, [
             [
-                `Reporte de Vuelos\nAerolinea Internacional\nFecha de generación: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`
+                `Reporte de Vuelos\nNOVA TRAVEL\nFecha de generación: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`
             ],
             columns.map(col => col.title),
         ], { origin: "A1" });

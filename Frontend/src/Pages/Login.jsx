@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../Service/Services';
 import '../assets/css/estilos.css';
-import imagen from '../../src/assets/img/oficina.jpg';
+import imagen from '../../src/assets/img/nova.jpg';
 
 function Login() {
     const [username, setUsername] = useState('');

@@ -9,6 +9,7 @@ import { aviones, crearAvion, modificarAvion } from '../Controller/AvionControll
 import { crearMueble, modificarMueble } from '../Controller/MuebleController.js';
 import { muebles } from '../Controller/MuebleController.js';
 import { informeNom } from '../Controller/InforNomController.js';
+import { ventas } from '../Controller/VentasController.js';
 
 
 
@@ -41,5 +42,6 @@ router.post('/mueble', crearMueble);
 router.get('/muebles', muebles);
 router.put('/modificar-mueble', modificarMueble);
 router.get('/nomina', informeNom);
+router.get('/ventas', ventas)
 
 export default router;

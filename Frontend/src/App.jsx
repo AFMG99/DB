@@ -13,6 +13,7 @@ import Cliente from './Pages/Cliente';
 import Aviones from './Pages/Aviones';
 import Mueble from './Pages/Mueble';
 import Nomina from './Pages/InformeNomina';
+import Ventas from './Pages/Ventas';
 
 
 
@@ -45,6 +46,7 @@ const MainContent = () => {
                 <Route path='/muebles' element={<Mueble />} />
                 <Route path='/aviones' element={<Aviones/>} />
                 <Route path='/nomina' element={<Nomina/>} />
+                <Route path='/ventas' element={<Ventas/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

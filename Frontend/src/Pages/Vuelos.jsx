@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import '../assets/css/formStyles.css';
 import "../assets/css/loginStyle.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile } from "@fortawesome/free-solid-svg-icons";
+import { faFileExcel,faFilePdf } from "@fortawesome/free-solid-svg-icons";
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
@@ -188,11 +188,11 @@ const Vuelos = () => {
                             </DataTable>
 
                             <div className='d-flex justify-content-center'>
-                                <button className="btn btnControlFrom" onClick={handleGeneratePDF}>
-                                    <FontAwesomeIcon icon={faFile} /> PDF
+                                <button className="btn btnIconInform" onClick={handleGeneratePDF}>
+                                    <FontAwesomeIcon icon={faFilePdf} fontSize={25} />
                                 </button>
-                                <button className='btn btnControlFrom' onClick={handleGenerateExcel}>
-                                    <FontAwesomeIcon icon={faFile} /> Excel
+                                <button className='btn btnIconInform' onClick={handleGenerateExcel}>
+                                    <FontAwesomeIcon icon={faFileExcel} fontSize={25}/>
                                 </button>
                             </div>
                         </div>

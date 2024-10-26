@@ -133,3 +133,8 @@ export const modificarAvion = async (avion) => {
     const response = await axios.put(`${API_URL}modificar-avion`, avion);
     return response.data;
 }
+
+export const ventas = async ()=>{
+    const response = await axios.get(`${API_URL}ventas`, ventas)
+    return response.data
+}

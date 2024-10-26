@@ -93,6 +93,10 @@ const Nomina = () => {
                     className="display"
                     options={{
                       responsive: true,
+                      // paging:false
+                      pageLength:[1000],
+                      // pagination:false,
+                      scrollY:true,
                       select: {
                         select: "single",
                         info: false

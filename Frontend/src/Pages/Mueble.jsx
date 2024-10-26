@@ -18,7 +18,7 @@ import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
 import spanishLanguage from "../assets/datatableSpanish";
 // import { getAllUsers } from "../../services/userService";
-import { crearMueble, muebles } from '../Service/Services';
+import { crearMueble, muebles, modificarMueble } from '../Service/Services';
 
 const Mueble = () => {
   DataTable.use(DT);
@@ -30,14 +30,14 @@ const Mueble = () => {
   const tableRef = useRef(null);
 
   const [dataUsers, setDataUsers] = useState([]);
-  const [accion, setAccion ] = useState("Nuevo");
+  const [accion, setAccion] = useState("Nuevo");
   const [btnNewDisabled, setBtnNewDisabled] = useState(false);
   const [btnEditDisabled, setBtnEditDisabled] = useState(true);
   const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
   const [btnSend, setBtnSend] = useState(true);
 
 
- 
+
   //
   // const [muebles, setMuebles] = useState([]);
   const [inputIdMueble, setinputIdMueble] = useState("");
@@ -47,7 +47,7 @@ const Mueble = () => {
   const [inputFechaAdquisicion, setinputFechaAdquisicion] = useState("");
   const [inputValorCompra, setinputValorCompra] = useState("");
   const [inputIdSede, setinputIdSede] = useState("");
-  
+
 
   const handleClickNew = () => {
     setBtnNewDisabled(true);
@@ -62,7 +62,7 @@ const Mueble = () => {
     setBtnEditDisabled(true);
     setBtnSend(true);
 
-    
+
     setinputIdMueble("");
     setinputNombre("");
     setinputTipo("");
@@ -87,50 +87,56 @@ const Mueble = () => {
   };
 
 
-  
+
   const handleUserKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      nombreRef.current.focus(); 
+      nombreRef.current.focus();
     }
   };
   const handleUserBlur = () => {
-    nombreRef.current.focus(); 
+    nombreRef.current.focus();
   };
 
 
-    
-    const handleSubmit = async (e) => {
-      e.preventDefault();
-    
-      try {
-        const nuevoMueble = {
-          Id_mueble: inputIdMueble,
-          Nombre: inputNombre,
-          Tipo: inputTipo,
-          Estado: inputEstado,
-          Fecha_adquisicion: inputFechaAdquisicion,
-          Valor_compra: inputValorCompra,
-          Id_sede: inputIdSede,
-        }
-        console.log('Datos', nuevoMueble);
-        await crearMueble(nuevoMueble);
-        console.log('Mueble creado', nuevoMueble);
-        const data = await getMuebles();
-        const formattedData = data.map(mueble => ({
-          ...mueble, 
-          Fecha_adquisicion: mueble.Fecha_adquisicion.split('T')[0],  
-        }));
 
-        setDataUsers(formattedData);
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-        handleClickCancel();
-        alert("Mueble creado con éxito");
-      } catch (error) {
-        console.log("Error al crear el mueble", error);
+    try {
+      const nuevoMueble = {
+        Id_mueble: inputIdMueble,
+        Nombre: inputNombre,
+        Tipo: inputTipo,
+        Estado: inputEstado,
+        Fecha_adquisicion: inputFechaAdquisicion,
+        Valor_compra: inputValorCompra,
+        Id_sede: inputIdSede,
       }
-    };
-    
+
+      // alert(accion)
+
+      if (accion === 'Nuevo') {
+        await crearMueble(nuevoMueble);
+        alert("Mueble creado con éxito");
+      } else if (accion === 'Editar') {
+        await modificarMueble(nuevoMueble);
+        alert("Mueble actualizado con éxito");
+      }
+
+      const data = await muebles();
+      const formattedData = data.map(mueble => ({
+        ...mueble,
+        Fecha_adquisicion: mueble.Fecha_adquisicion.split('T')[0],
+      }));
+
+      setDataUsers(formattedData);
+      handleClickCancel();
+    } catch (error) {
+      console.log("Error al crear el mueble", error);
+    }
+  };
+
 
 
   const columns = [
@@ -158,12 +164,19 @@ const Mueble = () => {
 
   }
 
-  
-    useEffect(() => {
-    const fetchUsers = async ()=>{
-      try { 
-          const datos = await muebles()
-          setDataUsers(datos)
+
+  useEffect(() => {
+
+
+    const fetchUsers = async () => {
+      try {
+        const data = await muebles()
+        const formattedData = data.map(mueble => ({
+          ...mueble,
+          Fecha_adquisicion: mueble.Fecha_adquisicion.split('T')[0],
+        }));
+        setDataUsers(formattedData)
+
       } catch (error) {
         alert(error)
       }
@@ -171,7 +184,7 @@ const Mueble = () => {
 
     fetchUsers();
   }, [])
-  
+
 
 
 
@@ -190,8 +203,8 @@ const Mueble = () => {
               >
                 <FontAwesomeIcon icon={faFile} /> Nuevo
               </button>
-              <button 
-                className="btn btnControlFrom" 
+              <button
+                className="btn btnControlFrom"
                 disabled={btnEditDisabled}
                 onClick={handleClickEdit}
               >
@@ -207,7 +220,7 @@ const Mueble = () => {
             </div>
 
             <div className="container mt-5">
-              <form  onSubmit={handleSubmit} >
+              <form onSubmit={handleSubmit} >
                 <div className="col-12">
                   <label className="form-label">Id Mueble </label>
                 </div>
@@ -243,7 +256,7 @@ const Mueble = () => {
                 </div>
                 <div className="col-12">
                   <input
-                  ref={usuarioRef}
+                    ref={usuarioRef}
                     className="form-control inputLogin"
                     placeholder="Ingrese el Tipo"
                     disabled={btnCancelDisabled ? true : false}

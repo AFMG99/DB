@@ -27,6 +27,12 @@ export const crearMueble = async (mueble) => {
     return response.data;
 }
 
+export const modificarMueble = async (mueble) => {
+    // alert("=====>")
+    const response = await axios.put(`${API_URL}modificar-mueble`, mueble);
+    return response.data;
+}
+
 export const getAllUsers = async () => {
     const response = await axios.get(`${API_URL}usuarios`);
     return response.data;
@@ -44,5 +50,10 @@ export const insertarAvion = async (avion) => {
 
 export const infoNomina = async()=>{
     const response = await axios.get(`${API_URL}nomina`, infoNomina);
+    return response.data;
+}
+
+export const modificarAvion = async (avion) => {
+    const response = await axios.put(`${API_URL}modificar-avion`, avion);
     return response.data;
 }

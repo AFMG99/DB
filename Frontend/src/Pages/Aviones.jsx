@@ -16,7 +16,7 @@ import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
 import spanishLanguage from "../assets/datatableSpanish";
-import { getAllAvion, insertarAvion } from '../Service/Services';
+import { getAllAvion, insertarAvion, modificarAvion } from '../Service/Services';
 
 
 const Aviones = () => {
@@ -91,7 +91,7 @@ const Aviones = () => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
 
     try {
       const nuevoAvion = {
@@ -102,21 +102,25 @@ const Aviones = () => {
         Tipo_vehiculo: inputTipoVehiculo,
         Cod_aeropuerto: inputCodAeropuerto,
       }
-      console.log('Datos', nuevoAvion);
-      await insertarAvion(nuevoAvion);
-      console.log('Avion creado', nuevoAvion);
+
+      if (accion === 'Nuevo') {
+        await insertarAvion(nuevoAvion);
+        alert("Avion creado con éxito");
+      } else if (accion === 'Editar') {
+        await modificarAvion(nuevoAvion);
+        alert("Avion actualizado con éxito");
+      }
+
       const data = await getAllAvion();
       const formattedData = data.map(avion => ({
-        ...avion,
-        Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
+          ...avion,
+          Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
       }));
 
       setDataAviones(formattedData);
-
       handleClickCancel();
-      alert('Avion creado con exito');
     } catch (error) {
-      console.log('Error al crear el avion', error);
+      console.log("Error al crear el avion", error);
     }
   };
 

@@ -31,7 +31,7 @@ const Aviones = () => {
   const tableRef = useRef(null);
 
   const [dataAviones, setDataAviones] = useState()
-  const [accion, setAccion ] = useState("Nuevo");
+  const [accion, setAccion] = useState("Nuevo");
   const [btnNewDisabled, setBtnNewDisabled] = useState(false);
   const [btnEditDisabled, setBtnEditDisabled] = useState(true);
   const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
@@ -79,15 +79,15 @@ const Aviones = () => {
   };
 
 
-  
+
   const handleUserKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
-      nombreRef.current.focus(); 
+      nombreRef.current.focus();
     }
   };
   const handleUserBlur = () => {
-    nombreRef.current.focus(); 
+    nombreRef.current.focus();
   };
 
   const handleSubmit = async (e) => {
@@ -113,8 +113,8 @@ const Aviones = () => {
 
       const data = await getAllAvion();
       const formattedData = data.map(avion => ({
-          ...avion,
-          Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
+        ...avion,
+        Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
       }));
 
       setDataAviones(formattedData);
@@ -126,11 +126,11 @@ const Aviones = () => {
 
   const columns = [
     { title: "Placa", data: "Placa" },
-    { title: "Nombre", data: "Nombre" },
-    { title: "Estado", data: "Estado" },
-    { title: "Fecha Adquisicion", data: "Fecha_adquisicion" },
+    { title: "Nombre Vehiculo", data: "Nombre" },
+    { title: "Estado Vehiculo", data: "Estado" },
+    { title: "Fecha Adq.", data: "Fecha_adquisicion" },
     { title: "Tipo Vehiculo", data: "Tipo_vehiculo" },
-    { title: "Cod. Aeropuerto", data: "Cod_aeropuerto"}
+    { title: "Aeropuerto", data: "Cod_aeropuerto" }
   ];
 
   const handleRowSelect = (event, dt, type, indexes) => {
@@ -144,25 +144,25 @@ const Aviones = () => {
     setinputTipoVehiculo(data.Tipo_vehiculo)
     setinputCodAeropuerto(data.Cod_aeropuerto)
   }
-  
-   useEffect(()=>{
-      const fetchAviones = async ()=>{
-        try {
-          const data = await getAllAvion();
-          const formattedData = data.map(avion => ({
-            ...avion,
-            Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
-          }));
-          setDataAviones(formattedData);
-        } catch (error) {
-          setError(error);
-        }
-       }
-       fetchAviones();
-   }, []);
 
-    
-  
+  useEffect(() => {
+    const fetchAviones = async () => {
+      try {
+        const data = await getAllAvion();
+        const formattedData = data.map(avion => ({
+          ...avion,
+          Fecha_adquisicion: avion.Fecha_adquisicion.split('T')[0],
+        }));
+        setDataAviones(formattedData);
+      } catch (error) {
+        setError(error);
+      }
+    }
+    fetchAviones();
+  }, []);
+
+
+
   return (
     <>
       {/* <Nav /> */}
@@ -178,8 +178,8 @@ const Aviones = () => {
               >
                 <FontAwesomeIcon icon={faFile} /> Nuevo
               </button>
-              <button 
-                className="btn btnControlFrom" 
+              <button
+                className="btn btnControlFrom"
                 disabled={btnEditDisabled}
                 onClick={handleClickEdit}
               >
@@ -195,24 +195,57 @@ const Aviones = () => {
             </div>
 
             <div className="container mt-5">
-              <form  onSubmit={handleSubmit} >
-                <div className="col-10">
-                  <label className="form-label">Placa</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={placaRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingresa Placa"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputPlaca}
-                    onChange={(e) => setinputPlaca(e.target.value)}
-                    onBlur={handleUserBlur}
-                    onKeyDown={handleUserKeyDown}
-                  />
+              <form onSubmit={handleSubmit} >
+
+                <div className="row">
+                  <div className="col-3">
+                    <label className="form-label">Placa</label>
+                  </div>
+                  <div className="col-5">
+                    <label className="form-label">Tipo Vehiculo</label>
+                  </div>
+                  <div className="col-4">
+                    <label className="form-label">Fecha Adquisición</label>
+                  </div>
+
+                  <div className="col-3">
+                    <input
+                      ref={placaRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingresa Placa"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputPlaca}
+                      onChange={(e) => setinputPlaca(e.target.value)}
+                      onBlur={handleUserBlur}
+                      onKeyDown={handleUserKeyDown}
+                    />
+                  </div>
+
+                  <div className="col-5">
+                    <input
+                      ref={tipo_vehiculoRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese el tipo de vehiculo"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputTipoVehiculo}
+                      onChange={(e) => setinputTipoVehiculo(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="col-4">
+                    <input
+                      ref={fecha_adquisicionRef}
+                      className="form-control inputLogin"
+                      placeholder="Fecha"
+                      disabled={btnCancelDisabled ? true : false}
+                      type='date'
+                      value={inputFechaAdquision}
+                      onChange={(e) => setinputFechaAdquision(e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <div className="col-10">
+                <div className="col-12">
                   <label className="form-label">Nombre</label>
                 </div>
                 <div className="col-12">
@@ -231,7 +264,7 @@ const Aviones = () => {
                 </div>
                 <div className="col-12">
                   <input
-                  ref={estadoRef}
+                    ref={estadoRef}
                     className="form-control inputLogin"
                     placeholder="Ingrese el estado"
                     disabled={btnCancelDisabled ? true : false}
@@ -241,37 +274,7 @@ const Aviones = () => {
                 </div>
 
                 <div className="col-10">
-                  <label className="form-label">Fecha Adquisición</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={fecha_adquisicionRef}
-                    className="form-control inputLogin"
-                    placeholder="Fecha"
-                    disabled={btnCancelDisabled ? true : false}
-                    type='date'
-                    value={inputFechaAdquision}
-                    onChange={(e) => setinputFechaAdquision(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-10">
-                  <label className="form-label">Tipo Vehiculo</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={tipo_vehiculoRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese el tipo de vehiculo"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputTipoVehiculo}
-                    onChange={(e) => setinputTipoVehiculo(e.target.value)}
-                  />
-                </div>
-
-                
-                <div className="col-10">
-                  <label className="form-label">Codigo de Aeropuerto</label>
+                  <label className="form-label">Codigo Aeropuerto</label>
                 </div>
                 <div className="col-12">
                   <input

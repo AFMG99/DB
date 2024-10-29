@@ -62,6 +62,12 @@ const Navegacion = () => {
                             <li className="nav-item">
                                 <Link to={"/usuarios"} className="nav-link">Usuarios</Link>
                             </li>
+                            <li className="nav-item">
+                                <Link to={"/mapa"} className="nav-link">Mapa</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to={"/vuelosapi"} className="nav-link">Vuelos Colombia</Link>
+                            </li>
                             <li className="nav-item dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Registrar

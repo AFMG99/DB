@@ -149,3 +149,19 @@ export const modificarUsuaro = async (usuario) => {
     const response = await axios.put(`${API_URL}actualizar-usuario`, usuario);
     return response.data;
 }
+
+// Modulo Vuelos
+export const vuelosAPI = async () => {
+    const response = await axios.get(
+        'https://opensky-network.org/api/states/all',
+        {
+          params: {
+            lamin: -4.226,    // Latitud mínima (sur de Colombia)
+            lamax: 13.392,    // Latitud máxima (norte de Colombia)
+            lomin: -81.728,   // Longitud mínima (oeste de Colombia)
+            lomax: -66.851    // Longitud máxima (este de Colombia)
+          }
+        }
+      );
+    return response.data.states;
+}

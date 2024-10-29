@@ -14,6 +14,8 @@ import Aviones from './Pages/Aviones';
 import Mueble from './Pages/Mueble';
 import Nomina from './Pages/InformeNomina';
 import Ventas from './Pages/Ventas';
+import Map from './Pages/Map';
+import ApiVuelos from './Pages/ApiVuelos';
 
 
 
@@ -47,6 +49,8 @@ const MainContent = () => {
                 <Route path='/aviones' element={<Aviones/>} />
                 <Route path='/nomina' element={<Nomina/>} />
                 <Route path='/ventas' element={<Ventas/>} />
+                <Route path='/mapa' element={<Map/>} />
+                <Route path='/vuelosapi' element={<ApiVuelos/>} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </>

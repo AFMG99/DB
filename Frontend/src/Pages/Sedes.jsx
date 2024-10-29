@@ -205,7 +205,9 @@ const Sedes = () => {
 
                         <div className="container mt-5">
                             <form onSubmit={handleSubmit}>
-                                <div className="col-12">
+
+                                <div className="row">
+                                <div className="col-3">
                                     <label className="form-label">ID Sede</label>
                                     <input
                                         ref={sedeidRef}
@@ -217,7 +219,7 @@ const Sedes = () => {
                                     />
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-6">
                                     <label className="form-label">Nombre</label>
                                     <input
                                         ref={nombreRef}
@@ -228,6 +230,20 @@ const Sedes = () => {
                                         onChange={(e) => setInputNombre(e.target.value)}
                                     />
                                 </div>
+
+                                <div className="col-3">
+                                    <label className="form-label">NIT</label>
+                                    <input
+                                        ref={nitRef}
+                                        className="form-control inputLogin"
+                                        placeholder="Ingrese NIT"
+                                        disabled={btnCancelDisabled ? true : false}
+                                        value={inputNit}
+                                        onChange={(e) => setInputNit(e.target.value)}
+                                    />
+                                </div>
+                                </div>
+
 
                                 <div className="col-12">
                                     <label className="form-label">Servicio</label>
@@ -241,25 +257,24 @@ const Sedes = () => {
                                     />
                                 </div>
 
-                                <div className="col-12">
+                                <div className="row">
+                                <div className="col-3">
                                     <label className="form-label">Capacidad</label>
                                     <input
                                         ref={capacidadRef}
                                         className="form-control inputLogin"
                                         type='number'
-                                        placeholder="Ingrese Capacidad"
                                         disabled={btnCancelDisabled ? true : false}
                                         value={inputCapacidad}
                                         onChange={(e) => setInputCapacidad(e.target.value)}
                                     />
                                 </div>
 
-                                <div className="col-12">
-                                    <label className="form-label">Número de Empleados</label>
+                                <div className="col-3">
+                                    <label className="form-label">N. Empleados</label>
                                     <input
                                         ref={numEmpleadoRef}
                                         className="form-control inputLogin"
-                                        placeholder="Ingrese Número de Empleados"
                                         type='number'
                                         disabled={btnCancelDisabled ? true : false}
                                         value={inputNumEmpleado}
@@ -267,7 +282,7 @@ const Sedes = () => {
                                     />
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-3">
                                     <label className="form-label">Hora Inicio</label>
                                     <input
                                         ref={horarioInicioRef}
@@ -279,7 +294,7 @@ const Sedes = () => {
                                     />
                                 </div>
 
-                                <div className="col-12">
+                                <div className="col-3">
                                     <label className="form-label">Hora Fin</label>
                                     <input
                                         ref={horarioFinRef}
@@ -290,17 +305,6 @@ const Sedes = () => {
                                         onChange={(e) => setInputHorarioFin(e.target.value)}
                                     />
                                 </div>
-
-                                <div className="col-12">
-                                    <label className="form-label">NIT</label>
-                                    <input
-                                        ref={nitRef}
-                                        className="form-control inputLogin"
-                                        placeholder="Ingrese NIT"
-                                        disabled={btnCancelDisabled ? true : false}
-                                        value={inputNit}
-                                        onChange={(e) => setInputNit(e.target.value)}
-                                    />
                                 </div>
 
                                 <br />

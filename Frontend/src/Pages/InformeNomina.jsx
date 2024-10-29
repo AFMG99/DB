@@ -47,7 +47,7 @@ const Nomina = () => {
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
 
-    doc.addImage(logo, 'PNG', 10, 10, 30, 30);
+    doc.addImage(logo, 'PNG', 10, 8, 30, 30);
     doc.setFontSize(18);
     doc.setFont('helvetica', 'bold');
     doc.text("Reporte de Nominas", pageWidth / 2, 20, { align: 'center' });
@@ -143,8 +143,8 @@ const Nomina = () => {
     });
     worksheet["!cols"] = columnWidths;
 
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Vuelos");
-    XLSX.writeFile(workbook, "vuelos_reporte.xlsx");
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Nomina");
+    XLSX.writeFile(workbook, "nomina_reporte.xlsx");
   };
 
   useEffect(() => {

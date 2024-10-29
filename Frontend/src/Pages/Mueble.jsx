@@ -1,23 +1,13 @@
 import '../assets/css/formStyles.css'
-
 import "../assets/css/loginStyle.css";
-// import { Nav } from "../../components/Nav";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBan,
-  faFile,
-  faPenToSquare,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-
+import { faFile, faPenToSquare, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useCallback, useRef, useState, useEffect } from "react";
-
 import DataTable from "datatables.net-react";
 import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
 import spanishLanguage from "../assets/datatableSpanish";
-// import { getAllUsers } from "../../services/userService";
 import { crearMueble, muebles, modificarMueble } from '../Service/Services';
 
 const Mueble = () => {
@@ -36,10 +26,6 @@ const Mueble = () => {
   const [btnCancelDisabled, setBtnCancelDisabled] = useState(true);
   const [btnSend, setBtnSend] = useState(true);
 
-
-
-  //
-  // const [muebles, setMuebles] = useState([]);
   const [inputIdMueble, setinputIdMueble] = useState("");
   const [inputNombre, setinputNombre] = useState("");
   const [inputTipo, setinputTipo] = useState("");
@@ -61,8 +47,6 @@ const Mueble = () => {
     setBtnCancelDisabled(true);
     setBtnEditDisabled(true);
     setBtnSend(true);
-
-
     setinputIdMueble("");
     setinputNombre("");
     setinputTipo("");
@@ -70,7 +54,6 @@ const Mueble = () => {
     setinputFechaAdquisicion("");
     setinputValorCompra("");
     setinputIdSede("");
-
     setAccion("Nuevo")
 
     const table = $(tableRef.current).DataTable();
@@ -86,8 +69,6 @@ const Mueble = () => {
     setAccion("Editar")
   };
 
-
-
   const handleUserKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -98,11 +79,8 @@ const Mueble = () => {
     nombreRef.current.focus();
   };
 
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const nuevoMueble = {
         Id_mueble: inputIdMueble,
@@ -113,8 +91,6 @@ const Mueble = () => {
         Valor_compra: inputValorCompra,
         Id_sede: inputIdSede,
       }
-
-      // alert(accion)
 
       if (accion === 'Nuevo') {
         await crearMueble(nuevoMueble);
@@ -137,8 +113,6 @@ const Mueble = () => {
     }
   };
 
-
-
   const columns = [
     { title: "Id Mueble", data: "Id_mueble" },
     { title: "Nombre", data: "Nombre" },
@@ -153,7 +127,6 @@ const Mueble = () => {
   const handleRowSelect = (event, dt, type, indexes) => {
     const data = dt.data();
     setBtnEditDisabled(false);
-
     setinputIdMueble(data.Id_mueble);
     setinputNombre(data.Nombre);
     setinputTipo(data.Tipo);
@@ -162,12 +135,9 @@ const Mueble = () => {
     setinputValorCompra(data.Valor_compra);
     setinputIdSede(data.Id_sede);
 
-  }
-
+  };
 
   useEffect(() => {
-
-
     const fetchUsers = async () => {
       try {
         const data = await muebles()
@@ -181,17 +151,11 @@ const Mueble = () => {
         alert(error)
       }
     }
-
     fetchUsers();
-  }, [])
-
-
-
+  }, []);
 
   return (
     <>
-      {/* <Nav /> */}
-
       <div className="containerPrincipal col-12">
         <div className="containerFormTable col-11">
           <div className="containerPart col-5">
@@ -221,105 +185,115 @@ const Mueble = () => {
 
             <div className="container mt-5">
               <form onSubmit={handleSubmit} >
-                <div className="col-12">
-                  <label className="form-label">Id Mueble </label>
-                </div>
-                <div className="col-8">
-                  <input
-                    ref={documentoidRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingresa Id"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputIdMueble}
-                    onChange={(e) => setinputIdMueble(e.target.value)}
-                    onBlur={handleUserBlur}
-                    onKeyDown={handleUserKeyDown}
-                  />
+
+                <div className="row">
+                  <div className="col-4">
+                    <label className="form-label">Id Mueble </label>
+                  </div>
+                  <div className="col-8">
+                    <label className="form-label">Nombre</label>
+                  </div>
+
+                  <div className="col-4">
+                    <input
+                      ref={documentoidRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingresa Id"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputIdMueble}
+                      onChange={(e) => setinputIdMueble(e.target.value)}
+                      onBlur={handleUserBlur}
+                      onKeyDown={handleUserKeyDown}
+                    />
+                  </div>
+
+                  <div className="col-8">
+                    <input
+                      ref={nombreRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese Nombre"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputNombre}
+                      onChange={(e) => setinputNombre(e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <div className="col-10">
-                  <label className="form-label">Nombre</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={nombreRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese Nombre"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputNombre}
-                    onChange={(e) => setinputNombre(e.target.value)}
-                  />
+                <div className="row">
+                  <div className="col-4">
+                    <label className="form-label">Tipo</label>
+                  </div>
+                  <div className="col-4">
+                    <label className="form-label">Estado</label>
+                  </div>
+                  <div className="col-4">
+                    <label className="form-label">Fecha de Adquisicion</label>
+                  </div>
+
+                  <div className="col-4">
+                    <input
+                      ref={usuarioRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese el Tipo"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputTipo}
+                      onChange={(e) => setinputTipo(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="col-4">
+                    <input
+                      ref={passwordRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese el Estado"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputEstado}
+                      onChange={(e) => setinputEstado(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="col-4">
+                    <input
+                      ref={passwordRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese la Fecha de Adquisicion"
+                      disabled={btnCancelDisabled ? true : false}
+                      type='date'
+                      value={inputFechaAdquisicion}
+                      onChange={(e) => setinputFechaAdquisicion(e.target.value)}
+                    />
+                  </div>
                 </div>
 
-                <div className="col-10">
-                  <label className="form-label">Tipo</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={usuarioRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese el Tipo"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputTipo}
-                    onChange={(e) => setinputTipo(e.target.value)}
-                  />
-                </div>
+                <div className="row">
+                  <div className="col-6">
+                    <label className="form-label">Valor</label>
+                  </div>
+                  <div className="col-6">
+                    <label className="form-label">Id Sede</label>
+                  </div>
 
-                <div className="col-10">
-                  <label className="form-label">Estado</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={passwordRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese el Estado"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputEstado}
-                    onChange={(e) => setinputEstado(e.target.value)}
-                  />
-                </div>
+                  <div className="col-6">
+                    <input
+                      ref={passwordRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese el Valor"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputValorCompra}
+                      onChange={(e) => setinputValorCompra(e.target.value)}
+                    />
+                  </div>
 
-                <div className="col-10">
-                  <label className="form-label">Fecha de Adquisicion</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={passwordRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese la Fecha de Adquisicion"
-                    disabled={btnCancelDisabled ? true : false}
-                    type='date'
-                    value={inputFechaAdquisicion}
-                    onChange={(e) => setinputFechaAdquisicion(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-10">
-                  <label className="form-label">Valor</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={passwordRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese el Valor"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputValorCompra}
-                    onChange={(e) => setinputValorCompra(e.target.value)}
-                  />
-                </div>
-
-                <div className="col-10">
-                  <label className="form-label">Id Sede</label>
-                </div>
-                <div className="col-12">
-                  <input
-                    ref={passwordRef}
-                    className="form-control inputLogin"
-                    placeholder="Ingrese el Id de la Sede"
-                    disabled={btnCancelDisabled ? true : false}
-                    value={inputIdSede}
-                    onChange={(e) => setinputIdSede(e.target.value)}
-                  />
+                  <div className="col-6">
+                    <input
+                      ref={passwordRef}
+                      className="form-control inputLogin"
+                      placeholder="Ingrese el Id de la Sede"
+                      disabled={btnCancelDisabled ? true : false}
+                      value={inputIdSede}
+                      onChange={(e) => setinputIdSede(e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 <br />
@@ -373,4 +347,5 @@ const Mueble = () => {
     </>
   );
 };
+
 export default Mueble;

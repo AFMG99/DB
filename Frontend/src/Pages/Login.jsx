@@ -58,7 +58,7 @@ function Login() {
 
                 <div className="col-md-6 d-flex align-items-center justify-content-center div">
                     <div className="login-box">
-                        <h2 className="text-center text-success">Agencia de Viajes</h2>
+                        <h2 className="text-center text-success">NOVA TRAVEL</h2>
 
                         <form className='form' onSubmit={handleLogin}>
                             <div className="mb-3 user">

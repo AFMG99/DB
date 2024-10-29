@@ -3,7 +3,9 @@
     margin: 0;
     padding: 0;
 }
-
+ .linkNewPassword:hover{
+    cursor: pointer;
+ }
 .navegacion {
     background-color: #132B40;
     padding: 0 30px;

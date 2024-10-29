@@ -138,3 +138,14 @@ export const ventas = async ()=>{
     const response = await axios.get(`${API_URL}ventas`, ventas)
     return response.data
 }
+
+
+export const crearUsuario = async (usuario) => {
+    const response = await axios.post(`${API_URL}crear-usuario`, usuario);
+    return response.data;
+} 
+
+export const modificarUsuaro = async (usuario) => {
+    const response = await axios.put(`${API_URL}actualizar-usuario`, usuario);
+    return response.data;
+}

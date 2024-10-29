@@ -1,12 +1,24 @@
 import { getAllUsers, authenticateUser, updatePassword } from "../Model/LoginModel.js";
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto'
 
 const Users = async (req, res) => {
     try {
-        const user = await getAllUsers();
-        res.json(user);
+        const users = await getAllUsers();
+
+        // Encriptar la contraseña de cada usuario antes de enviarla
+        const encryptedUsers = users.map(user => {
+            // Crear el hash para la contraseña
+            const hash = crypto.createHash('sha1').update(user.Contrasena).digest('hex');
+            return {
+                ...user,
+                Contrasena: hash, // Reemplazar el campo de la contraseña con el hash
+            };
+        });
+
+        res.json(encryptedUsers);
     } catch (error) {
-        res.status(500).json({ message: error.message })
+        res.status(500).json({ message: error.message });
     }
 };
 

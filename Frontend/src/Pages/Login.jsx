@@ -39,6 +39,16 @@ function Login() {
         }
     };
 
+    const handleNewPassword = (e) =>{
+        e.preventDefault();
+         if (!username) {
+            alert('Por favor,digita el usuario.');
+            return;
+        }
+        navigate('/cambiar-contrasena', { state: { username } });
+        
+    }
+
     return (
         <div className="container-fluid login-page">
             <div className="row vh-100">
@@ -80,7 +90,8 @@ function Login() {
                             <button type="submit" className="btn btn-success w-100 mb-3">Login</button>
 
                             <div className="d-flex justify-content-center">
-                                <Link to="/cambiar-contrasena" className="text-success">¿Olvidaste tu Contraseña?</Link>
+                                <a onClick={handleNewPassword} className='text-success linkNewPassword'>¿Olvidaste tu Contraseña?</a>
+                                {/* <Link to="/cambiar-contrasena" className="text-success">¿Olvidaste tu Contraseña?</Link> */}
                             </div>
                         </form>
                     </div>

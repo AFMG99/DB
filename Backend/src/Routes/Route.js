@@ -10,10 +10,14 @@ import { crearMueble, modificarMueble } from '../Controller/MuebleController.js'
 import { muebles } from '../Controller/MuebleController.js';
 import { informeNom } from '../Controller/InforNomController.js';
 import { ventas } from '../Controller/VentasController.js';
+import { crearUsuario, modificarUsuario } from '../Controller/UsuarioController.js';
 
 
 
 const router = express.Router();
+
+router.post('/crear-usuario', crearUsuario);
+router.put('/actualizar-usuario', modificarUsuario);
 
 router.post('/crear-empleado', crearEmpleado);
 router.put('/actualizar-empleado', modificarEmpleado);

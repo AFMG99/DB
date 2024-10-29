@@ -15,7 +15,7 @@ import DT from "datatables.net-dt";
 import "datatables.net-select-dt";
 import "datatables.net-responsive-dt";
 import spanishLanguage from "../../assets/datatableSpanish";
-import { getAllUsers } from '../../Service/Services';
+import { crearCliente, crearUsuario, getAllUsers, modificarUsuaro } from '../../Service/Services';
 
 const Usuarios = () => {
   DataTable.use(DT);
@@ -81,8 +81,31 @@ const Usuarios = () => {
     nombreRef.current.focus();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    try {
+      const Usuario = {
+          DocumentoID: inputDocumentoId,
+          Nombre: inputNombre,
+          Password: inputContrasena,
+          Correo: inputCorreo
+      };
+
+      if (accion === 'Nuevo') {
+          await crearUsuario(Usuario);
+          alert('Usuario agregado exitosamente');
+      } else if (accion === 'Editar') {
+          await modificarUsuaro(Usuario);
+          alert('Usuario actualizado exitosamente');
+      }
+
+      const data = await getAllUsers();
+      setDataUsers(data);
+      handleClickCancel();
+  } catch (error) {
+      console.error("Error al procesar cliente:", error);
+  }
+
   }
 
   const columns = [
@@ -97,7 +120,7 @@ const Usuarios = () => {
     setBtnEditDisabled(false);
     setinputDocumentoId(data.Id_usuario)
     setinputNombre(data.Nombre)
-    setInputContrasena(data.Contrasena)
+    // setInputContrasena(data.Contrasena)
     setInputCorreo(data.Correo)
   }
   
@@ -105,7 +128,6 @@ const Usuarios = () => {
      const fetchUsers = async ()=>{
        try { 
            const datos = await getAllUsers()
-           console.log('datos', datos)
            setDataUsers(datos)
        } catch (error) {
          alert(error)
@@ -216,7 +238,7 @@ const Usuarios = () => {
                   className="btn w-100 btnGuardar"
                   disabled={btnSend}
                 >
-                  {(accion == "Editar") ? "Editar" : "Agregar"}
+                  {(accion == "Editar") ? "Actualizar" : "Agregar"}
                 </button>
               </form>
             </div>
